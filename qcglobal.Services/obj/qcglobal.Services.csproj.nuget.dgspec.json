@@ -1,0 +1,191 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\AngularCore\\qcglobal\\qcglobal.Services\\qcglobal.Services.csproj": {}
+  },
+  "projects": {
+    "D:\\AngularCore\\qcglobal\\qcglobal.Core\\qcglobal.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\AngularCore\\qcglobal\\qcglobal.Core\\qcglobal.Core.csproj",
+        "projectName": "qcglobal.Core",
+        "projectPath": "D:\\AngularCore\\qcglobal\\qcglobal.Core\\qcglobal.Core.csproj",
+        "packagesPath": "C:\\Users\\phamq\\.nuget\\packages\\",
+        "outputPath": "D:\\AngularCore\\qcglobal\\qcglobal.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\phamq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "FluentNHibernate": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\AngularCore\\qcglobal\\qcglobal.Repositories\\qcglobal.Repositories.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\AngularCore\\qcglobal\\qcglobal.Repositories\\qcglobal.Repositories.csproj",
+        "projectName": "qcglobal.Repositories",
+        "projectPath": "D:\\AngularCore\\qcglobal\\qcglobal.Repositories\\qcglobal.Repositories.csproj",
+        "packagesPath": "C:\\Users\\phamq\\.nuget\\packages\\",
+        "outputPath": "D:\\AngularCore\\qcglobal\\qcglobal.Repositories\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\phamq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\AngularCore\\qcglobal\\qcglobal.Core\\qcglobal.Core.csproj": {
+                "projectPath": "D:\\AngularCore\\qcglobal\\qcglobal.Core\\qcglobal.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\AngularCore\\qcglobal\\qcglobal.Services\\qcglobal.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\AngularCore\\qcglobal\\qcglobal.Services\\qcglobal.Services.csproj",
+        "projectName": "qcglobal.Services",
+        "projectPath": "D:\\AngularCore\\qcglobal\\qcglobal.Services\\qcglobal.Services.csproj",
+        "packagesPath": "C:\\Users\\phamq\\.nuget\\packages\\",
+        "outputPath": "D:\\AngularCore\\qcglobal\\qcglobal.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\phamq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\AngularCore\\qcglobal\\qcglobal.Core\\qcglobal.Core.csproj": {
+                "projectPath": "D:\\AngularCore\\qcglobal\\qcglobal.Core\\qcglobal.Core.csproj"
+              },
+              "D:\\AngularCore\\qcglobal\\qcglobal.Repositories\\qcglobal.Repositories.csproj": {
+                "projectPath": "D:\\AngularCore\\qcglobal\\qcglobal.Repositories\\qcglobal.Repositories.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

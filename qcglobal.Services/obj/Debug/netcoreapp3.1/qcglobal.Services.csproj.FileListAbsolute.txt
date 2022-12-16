@@ -1,0 +1,15 @@
+D:\AngularCore\qcglobal\qcglobal.Services\bin\Debug\netcoreapp3.1\qcglobal.Services.deps.json
+D:\AngularCore\qcglobal\qcglobal.Services\bin\Debug\netcoreapp3.1\qcglobal.Services.dll
+D:\AngularCore\qcglobal\qcglobal.Services\bin\Debug\netcoreapp3.1\qcglobal.Services.pdb
+D:\AngularCore\qcglobal\qcglobal.Services\bin\Debug\netcoreapp3.1\qcglobal.Core.dll
+D:\AngularCore\qcglobal\qcglobal.Services\bin\Debug\netcoreapp3.1\qcglobal.Repositories.dll
+D:\AngularCore\qcglobal\qcglobal.Services\bin\Debug\netcoreapp3.1\qcglobal.Core.pdb
+D:\AngularCore\qcglobal\qcglobal.Services\bin\Debug\netcoreapp3.1\qcglobal.Repositories.pdb
+D:\AngularCore\qcglobal\qcglobal.Services\obj\Debug\netcoreapp3.1\qcglobal.Services.csproj.AssemblyReference.cache
+D:\AngularCore\qcglobal\qcglobal.Services\obj\Debug\netcoreapp3.1\qcglobal.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\AngularCore\qcglobal\qcglobal.Services\obj\Debug\netcoreapp3.1\qcglobal.Services.AssemblyInfoInputs.cache
+D:\AngularCore\qcglobal\qcglobal.Services\obj\Debug\netcoreapp3.1\qcglobal.Services.AssemblyInfo.cs
+D:\AngularCore\qcglobal\qcglobal.Services\obj\Debug\netcoreapp3.1\qcglobal.Services.csproj.CoreCompileInputs.cache
+D:\AngularCore\qcglobal\qcglobal.Services\obj\Debug\netcoreapp3.1\qcglobal.Services.csproj.CopyComplete
+D:\AngularCore\qcglobal\qcglobal.Services\obj\Debug\netcoreapp3.1\qcglobal.Services.dll
+D:\AngularCore\qcglobal\qcglobal.Services\obj\Debug\netcoreapp3.1\qcglobal.Services.pdb

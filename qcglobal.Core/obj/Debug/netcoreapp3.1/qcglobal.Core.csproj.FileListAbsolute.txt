@@ -1,0 +1,10 @@
+D:\AngularCore\qcglobal\qcglobal.Core\bin\Debug\netcoreapp3.1\qcglobal.Core.deps.json
+D:\AngularCore\qcglobal\qcglobal.Core\bin\Debug\netcoreapp3.1\qcglobal.Core.dll
+D:\AngularCore\qcglobal\qcglobal.Core\bin\Debug\netcoreapp3.1\qcglobal.Core.pdb
+D:\AngularCore\qcglobal\qcglobal.Core\obj\Debug\netcoreapp3.1\qcglobal.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\AngularCore\qcglobal\qcglobal.Core\obj\Debug\netcoreapp3.1\qcglobal.Core.AssemblyInfoInputs.cache
+D:\AngularCore\qcglobal\qcglobal.Core\obj\Debug\netcoreapp3.1\qcglobal.Core.AssemblyInfo.cs
+D:\AngularCore\qcglobal\qcglobal.Core\obj\Debug\netcoreapp3.1\qcglobal.Core.csproj.CoreCompileInputs.cache
+D:\AngularCore\qcglobal\qcglobal.Core\obj\Debug\netcoreapp3.1\qcglobal.Core.dll
+D:\AngularCore\qcglobal\qcglobal.Core\obj\Debug\netcoreapp3.1\qcglobal.Core.pdb
+D:\AngularCore\qcglobal\qcglobal.Core\obj\Debug\netcoreapp3.1\qcglobal.Core.csproj.AssemblyReference.cache

@@ -1,0 +1,13 @@
+D:\AngularCore\qcglobal\qcglobal.Repositories\bin\Debug\netcoreapp3.1\qcglobal.Repositories.deps.json
+D:\AngularCore\qcglobal\qcglobal.Repositories\bin\Debug\netcoreapp3.1\qcglobal.Repositories.dll
+D:\AngularCore\qcglobal\qcglobal.Repositories\bin\Debug\netcoreapp3.1\qcglobal.Repositories.pdb
+D:\AngularCore\qcglobal\qcglobal.Repositories\bin\Debug\netcoreapp3.1\qcglobal.Core.dll
+D:\AngularCore\qcglobal\qcglobal.Repositories\bin\Debug\netcoreapp3.1\qcglobal.Core.pdb
+D:\AngularCore\qcglobal\qcglobal.Repositories\obj\Debug\netcoreapp3.1\qcglobal.Repositories.csproj.AssemblyReference.cache
+D:\AngularCore\qcglobal\qcglobal.Repositories\obj\Debug\netcoreapp3.1\qcglobal.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\AngularCore\qcglobal\qcglobal.Repositories\obj\Debug\netcoreapp3.1\qcglobal.Repositories.AssemblyInfoInputs.cache
+D:\AngularCore\qcglobal\qcglobal.Repositories\obj\Debug\netcoreapp3.1\qcglobal.Repositories.AssemblyInfo.cs
+D:\AngularCore\qcglobal\qcglobal.Repositories\obj\Debug\netcoreapp3.1\qcglobal.Repositories.csproj.CoreCompileInputs.cache
+D:\AngularCore\qcglobal\qcglobal.Repositories\obj\Debug\netcoreapp3.1\qcglobal.Repositories.csproj.CopyComplete
+D:\AngularCore\qcglobal\qcglobal.Repositories\obj\Debug\netcoreapp3.1\qcglobal.Repositories.dll
+D:\AngularCore\qcglobal\qcglobal.Repositories\obj\Debug\netcoreapp3.1\qcglobal.Repositories.pdb
