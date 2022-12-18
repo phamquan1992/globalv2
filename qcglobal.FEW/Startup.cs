@@ -34,6 +34,7 @@ namespace qcglobal.FEW
             services.AddSignalR();
             services.AddNHibernate(Configuration["ConnectionStrings:DefaultConnection"]);
             #region Repository
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IbranchRepository, branchRepository>();
             services.AddScoped<IdepartmentRepository, departmentRepository>();
@@ -45,7 +46,9 @@ namespace qcglobal.FEW
             services.AddScoped<ImdtypeserviceRepository, mdtypeserviceRepository>();
             services.AddScoped<ItitleRepository, titleRepository>();
             #endregion
+
             #region Services
+            services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             services.AddScoped<IbranchService, branchService>();
             services.AddScoped<IdepartmentService, departmentService>();
             services.AddScoped<ImdareasService, mdareasService>();

@@ -49,4 +49,7 @@ export interface branch_edit {
 }
 export interface result_object {
     result: string;
+    data: any;
+    qcGlobalCode: any;
+    message: any;
 }
