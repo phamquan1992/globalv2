@@ -77,13 +77,13 @@
                         style="font-size: 18px;" (click)="sua_item(element)"></i>
                 </td>
             </ng-container>
-            <div [formGroup]="formfilter">
+            <div>
                 <ng-container *ngFor="let it of displayedColumns2;let i= index" [matColumnDef]="it">
                     <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm"
                         style="border-top: none !important;">
-                        <input *ngIf="i!==0 && i!=displayedColumns2.length-1" class="outline-none w-full" type="text"
-                            [formControlName]="it" (keyup)="applyFilter(it,$event.target)"
-                            placeholder="Nhập thông tin tìm kiếm">
+                        <app-filterrow *ngIf="i!==0 && i!=displayedColumns2.length-1" [iteminput]="arr_filter[i-1]"
+                            [form]="formfilter">
+                        </app-filterrow>
                     </th>
                 </ng-container>
             </div>

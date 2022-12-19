@@ -6,11 +6,11 @@ using System.Text;
 
 namespace qcglobal.Services.ISerivce
 {
-    public interface ItitleService
+    public interface ItitleService : IBaseService<title>
     {
-        IQueryable<title> GetAll();
-        bool CreateNew(title obj);
-        bool Update(title obj);
-        bool Delete(title obj);
+        //IQueryable<title> GetAll();
+        //bool CreateNew(title obj);
+        //bool Update(title obj);
+        //bool Delete(title obj);
     }
 }

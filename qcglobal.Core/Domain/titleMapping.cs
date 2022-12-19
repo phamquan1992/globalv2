@@ -18,7 +18,7 @@ namespace qcglobal.Core.Domain
             Map(x => x.isactive).Nullable();
             Map(x => x.last_updated_by).Nullable();
             Map(x => x.last_updated_date).Nullable();
-            Map(x => x.order).Nullable();
+            Map(x => x.orderidx).Nullable();
             Map(x => x.titlecode).Not.Nullable();
             Map(x => x.titlename).Not.Nullable();
         }

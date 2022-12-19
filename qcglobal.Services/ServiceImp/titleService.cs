@@ -8,52 +8,19 @@ using System.Text;
 
 namespace qcglobal.Services.ServiceImp
 {
-    public class titleService : ItitleService
+    public class titleService : BaseService<title>, ItitleService
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public titleService(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-        public IQueryable<title> GetAll()
-        {
-            return _unitOfWork.titleRepository.GetAll();
-        }
-        public bool CreateNew(title obj)
-        {
-            try
-            {
-                return _unitOfWork.titleRepository.Add(obj);
+        #region declare
 
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-        public bool Update(title obj)
-        {
-            try
-            {
-                return _unitOfWork.titleRepository.Update(obj);
+        ItitleRepository _titleRepository;
 
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-        public bool Delete(title obj)
-        {
-            try
-            {
-                return _unitOfWork.titleRepository.Delete(obj);
+        #endregion
 
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+        #region contructor
+        public titleService(ItitleRepository titleRepository) : base(titleRepository)
+        {
+            _titleRepository = titleRepository;
         }
+        #endregion
     }
 }

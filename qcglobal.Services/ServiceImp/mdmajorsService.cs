@@ -25,50 +25,6 @@ namespace qcglobal.Services.ServiceImp
         #endregion
 
 
-        //private readonly IUnitOfWork _unitOfWork;
-        //public mdmajorsService(IUnitOfWork unitOfWork)
-        //{
-        //    _unitOfWork = unitOfWork;
-        //}
-        //public IQueryable<mdmajors> GetAll()
-        //{
-        //    return _unitOfWork.mdmajorsRepository.GetAll();
-        //}
-        //public bool CreateNew(mdmajors obj)
-        //{
-        //    try
-        //    {
-        //        return _unitOfWork.mdmajorsRepository.Add(obj);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return false;
-        //    }
-        //}
-        //public bool Update(mdmajors obj)
-        //{
-        //    try
-        //    {
-        //        return _unitOfWork.mdmajorsRepository.Update(obj);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return false;
-        //    }
-        //}
-        //public bool Delete(mdmajors obj)
-        //{
-        //    try
-        //    {
-        //        return _unitOfWork.mdmajorsRepository.Delete(obj);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return false;
-        //    }
-        //}
+       
     }
 }
