@@ -14,29 +14,32 @@ import { custormer_detail, mdcustomer } from 'src/app/models/mdcustomer';
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*',"border-bottom":'1px solid #0000001f' })),
+      state('expanded', style({ height: '*', "border-bottom": '1px solid #0000001f' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
 export class KhachhangComponent implements OnInit, AfterViewInit {
   arr_custormer: mdcustomer[] = [];
-  
+
   dataSource = new MatTableDataSource<mdcustomer>(this.arr_custormer);
-  
+
   loading$ = false;
   name_filter = '';
   displayedColumns: string[] = ['select', 'objectcode', 'objectname', 'address', 'action'];
   displayedColumns2: string[] = ['cot1', 'objectcode_filter', 'objectname_filter', 'address_filter', 'cot6'];
-  
+
   selection = new SelectionModel<mdcustomer>(true, []);
-  row_expand!:mdcustomer;
+  row_expand!: mdcustomer;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   formfilter!: FormGroup;
   filter_object = {
     objectcode: '',
     objectname: '',
     address: ''
+  }
+  constructor(private dialog: MatDialog) {
+
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -62,11 +65,11 @@ export class KhachhangComponent implements OnInit, AfterViewInit {
       this.arr_custormer.push(item);
     }
     this.dataSource = new MatTableDataSource<mdcustomer>(this.arr_custormer);
-    
-    
+
+
   }
   select_row(data: mdcustomer) {
-    
+
   }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -90,6 +93,7 @@ export class KhachhangComponent implements OnInit, AfterViewInit {
     };
     this.showEditDialog(data);
   }
+  arr_slect: mdcustomer[] = [];
   showEditDialog(data: mdcustomer) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
@@ -104,6 +108,24 @@ export class KhachhangComponent implements OnInit, AfterViewInit {
     //     }
     //   }
     // );
+    // this.row_expand = this.row_expand === data ? null as unknown as mdcustomer: data;    
+  }
+  get_item(gt: mdcustomer) {
+    let index = this.arr_slect.findIndex(t => t.id == gt.id);
+    return index !== -1;
+  }
+  row_click(gt: mdcustomer) {
+    if (this.arr_slect.length === 0)
+      this.arr_slect.push(gt);
+    else {
+      let index = this.arr_slect.findIndex(t => t.id == gt.id);
+      if (index !== -1) {
+        this.arr_slect = [];
+      } else {
+        this.arr_slect = [];
+        this.arr_slect.push(gt);
+      }
+    }
   }
   applyFilter(name_filter: string, gt: any) {
     let name_tmp = name_filter.split('_')[0];

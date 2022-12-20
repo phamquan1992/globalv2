@@ -5,18 +5,13 @@
             Danh sách địa bàn hành chính
         </h3>
     </div>
-    <section class="px-[15px]">
+    <!-- <section class="px-[15px]">
         <button
             class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]"
             (click)="them_moi()">Thêm mới</button>
         <button (click)="showXoaDialog('')"
             class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#ff0000a6] text-white text-[13px] mr-[5px] mb-[5px]">Xoá</button>
-        <button
-            class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]">Ẩn</button>
-        <button
-            class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]">Hiện</button>
-
-    </section>
+    </section> -->
 </div>
 
 <div class="px-[15px]">
@@ -83,7 +78,7 @@
                     <span class="text-sm mobile-span" *ngSwitchCase="3">Xã</span>
             </ng-container>
 
-            <ng-container matColumnDef="action">
+            <!-- <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold w-[100px] ">
                     Hành động</th>
                 <td mat-cell *matCellDef="let element" class=" break-all text-center" style="padding: 4px;">
@@ -94,7 +89,7 @@
                         [matTooltip]="'Chi tiết doanh nghiệp, cá nhân'" [matTooltipPosition]="'above'"
                         style="font-size: 18px;" (click)="sua_item(element)"></i>
                 </td>
-            </ng-container>
+            </ng-container> -->
             <div>
                 <ng-container *ngFor="let it of displayedColumns2;let i= index" [matColumnDef]="it">
                     <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm"
@@ -102,7 +97,7 @@
                         <!-- <input *ngIf="i!==0 && i!=displayedColumns2.length-1" class="outline-none w-full" type="text"
                             [formControlName]="it" (keyup)="applyFilter(it,$event.target)"
                             placeholder="Nhập thông tin tìm kiếm"> -->
-                        <app-filterrow *ngIf="i!==0 && i!=displayedColumns2.length-1" [iteminput]="arr_filter[i-1]"
+                        <app-filterrow *ngIf="i!==0" [iteminput]="arr_filter[i-1]"
                             [form]="formfilter">
                         </app-filterrow>
                     </th>
