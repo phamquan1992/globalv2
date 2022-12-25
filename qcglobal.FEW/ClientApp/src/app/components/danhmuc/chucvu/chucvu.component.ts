@@ -4,9 +4,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { qc_title,qctitle_edit } from 'src/app/models/qc_title';
+import { qc_title, qctitle_edit } from 'src/app/models/qc_title';
 import { EditchucvuComponent } from './editchucvu/editchucvu.component';
-import { QcTitleService } from 'src/app/services/qctitle.service';
 import { Inputbase } from 'src/app/models/input-base';
 import { InputDropdown } from 'src/app/models/inputdropdown';
 import { MessageService } from 'src/app/services/message.service';
@@ -14,6 +13,7 @@ import { AlertComponent } from 'src/app/shared/alert/alert.component';
 import { InputText } from 'src/app/models/inputtext';
 import { InputControlService } from 'src/app/services/input-control.service';
 import { DepartmentService } from 'src/app/services/department.service';
+import { QcTitleService } from 'src/app/services/qctitle.service';
 
 @Component({
   selector: 'app-chucvu',
@@ -25,15 +25,15 @@ export class ChucvuComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<qc_title>(this.arr_tilte);
   loading$ = false;
   name_filter = '';
-  displayedColumns: string[] = ['select', 'titlecode', 'titlename','departmentid', 'description','isactive', 'action'];
-  displayedColumns2: string[] = ['cot1', 'titlecode_filter', 'titlename_filter','departmentid_filter', 'description_filter','isactive_filter', 'cot6'];
+  displayedColumns: string[] = ['select', 'titlecode', 'titlename', 'departmentid', 'description', 'isactive', 'action'];
+  displayedColumns2: string[] = ['cot1', 'titlecode_filter', 'titlename_filter', 'departmentid_filter', 'description_filter', 'isactive_filter', 'cot6'];
   selection = new SelectionModel<qc_title>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   formfilter!: FormGroup;
   arr_temp: { key: string, value: string }[] = [];
   arr_filter: Inputbase<string>[] = [];
 
-  constructor(private dialog: MatDialog, private departmentSrv: DepartmentService, private qctitleSrv: QcTitleService, private controlSrv: InputControlService,private messSrv: MessageService,) {
+  constructor(private dialog: MatDialog, private departmentSrv: DepartmentService, private qctitleSrv: QcTitleService, private controlSrv: InputControlService, private messSrv: MessageService,) {
 
   }
   ngAfterViewInit(): void {

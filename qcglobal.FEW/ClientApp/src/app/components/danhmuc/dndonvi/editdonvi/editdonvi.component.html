@@ -5,14 +5,14 @@
     </div>
   </div>
 
-  <div class="max-w-[768px] mx-auto border border-solid border-gray-400 p-3 rounded shadow-lg">
+  <div class="max-w-[768px] mx-auto border-none p-3">
     <form (ngSubmit)="onSubmit()" [formGroup]="form" class="grid grid-cols-1 md:grid-cols-2 gap-3">
       <div *ngFor="let question of arrinput"
         [ngClass]="{'col-span-1 md:col-span-2':question.key==='description'||question.key==='address'}">
         <app-custominput [iteminput]="question" [form]="form">
         </app-custominput>
       </div>
-      <div class="col-span-1 md:col-span-2">
+      <div class="col-span-1 md:col-span-2 mx-auto">
         <button type="submit" [attr.disabled]="form.invalid?'':null"
           [ngClass]="{'bg-[#196898]':form.valid,'bg-[#849faf]':!form.valid}"
           class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] text-white text-[13px] mr-[5px] my-[5px]">

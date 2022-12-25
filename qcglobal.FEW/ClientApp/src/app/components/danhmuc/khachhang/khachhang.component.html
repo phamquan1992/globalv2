@@ -11,10 +11,7 @@
             (click)="them_moi()">Thêm mới</button>
         <button (click)="showXoaDialog('')"
             class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#ff0000a6] text-white text-[13px] mr-[5px] mb-[5px]">Xoá</button>
-        <button
-            class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]">Ẩn</button>
-        <button
-            class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]">Hiện</button>
+
 
     </section>
 </div>
@@ -40,7 +37,7 @@
                 <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold w-[100px]">
                     Mã khách hàng
                 </th>
-                <td mat-cell *matCellDef="let element" class=" text-center" style="padding: 4px;">
+                <td mat-cell *matCellDef="let element" class=" text-center" style="padding: 4px;" (click)="row_click(element)">
                     <span class="mobile-label">Mã khách hàng:</span>
                     <span class="text-sm mobile-span">{{element.objectcode}}</span>
                 </td>
@@ -49,7 +46,7 @@
             <ng-container matColumnDef="objectname">
                 <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold ">Tên
                     khách hàng</th>
-                <td mat-cell *matCellDef="let element" class=" break-all text-center" style="padding: 4px;">
+                <td mat-cell *matCellDef="let element" class=" break-all text-center" style="padding: 4px;" (click)="row_click(element)">
                     <span class="mobile-label">Tên khách hàng:</span>
                     <span class="text-sm mobile-span">{{element.objectname}}</span>
                 </td>
@@ -59,7 +56,7 @@
                 <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold">
                     Địa chỉ
                 </th>
-                <td mat-cell *matCellDef="let element" class=" break-all text-center" style="padding: 4px;">
+                <td mat-cell *matCellDef="let element" class=" break-all text-center" style="padding: 4px;" (click)="row_click(element)">
                     <span class="mobile-label">Địa chỉ:</span>
                     <span class="text-sm mobile-span">{{element.address}}</span>
                 </td>
@@ -89,7 +86,7 @@
             </div>
             <ng-container matColumnDef="expandedDetail">
                 <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-                    <div class="w-full" [@detailExpand]="row_expand===element ? 'expanded' : 'collapsed'">
+                    <div class="w-full" [@detailExpand]="get_item(element) ? 'expanded' : 'collapsed'">
                         <app-rowdetail [parent_id]="element.id" class="overflow-hidden"></app-rowdetail>
                     </div>
                 </td>
@@ -102,10 +99,9 @@
             </tr>
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="row_expand=row_expand===row?null:row">
-            </tr>
-            <tr mat-row *matRowDef="let row1; columns: ['expandedDetail']" class="w-full expand_row"
-                ></tr>
+            <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="row_expand=row_expand===row?null:row"></tr> -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-row *matRowDef="let row1; columns: ['expandedDetail']" class="w-full expand_row"></tr>
         </table>
     </section>
     <mat-paginator [pageSizeOptions]="[10, 20, 50,100,200]" showFirstLastButtons [pageSize]="20" class="mr-[7px]"

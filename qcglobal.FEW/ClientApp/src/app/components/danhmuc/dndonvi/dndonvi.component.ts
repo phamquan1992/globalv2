@@ -179,8 +179,9 @@ export class DndonviComponent implements OnInit, AfterViewInit {
     };
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "520px";
-    dialogConfig.panelClass = "pd_dialog_none";
+    // dialogConfig.width = "520px";
+    dialogConfig.maxWidth = "100%";
+    dialogConfig.panelClass = ['md:w-[520px]', 'md:h-auto', 'mt-2', 'mt-0', 'w-[95%]', 'h-[95%]', 'magrin_pane'];
     dialogConfig.data = edit_value;
     dialogConfig.disableClose = true;
     this.dialog.open(EditdonviComponent, dialogConfig).afterClosed().subscribe(

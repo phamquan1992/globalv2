@@ -22,8 +22,8 @@ export class DiabanhcComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<mdareas>(this.arr_mdmajors);
   loading$ = false;
   name_filter = '';
-  displayedColumns: string[] = ['select', 'code', 'name', 'status', 'levelion', 'action'];
-  displayedColumns2: string[] = ['cot1', 'code_filter', 'name_filter', 'status_filter', 'levelion_filter', 'cot6'];
+  displayedColumns: string[] = ['select', 'code', 'name', 'status', 'levelion'];
+  displayedColumns2: string[] = ['cot1', 'code_filter', 'name_filter', 'status_filter', 'levelion_filter',];
   selection = new SelectionModel<mdareas>(true, []);
   arr_filter: Inputbase<string>[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
