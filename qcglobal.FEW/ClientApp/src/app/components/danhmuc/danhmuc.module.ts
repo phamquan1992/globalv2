@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { DanhmucRoutingModule } from './danhmuc-routing.module';
 import { DanhmucComponent } from './danhmuc.component';
 import { DndonviComponent } from './dndonvi/dndonvi.component';
@@ -25,7 +24,14 @@ import { RowdetailComponent } from './khachhang/rowdetail/rowdetail.component';
 import { EditmdmajorsComponent } from './chuyennganh/editmdmajors/editmdmajors.component';
 import { EditmdareasComponent } from './diabanhc/editmdareas/editmdareas.component';
 import { EditdepartComponent } from './phongban/editdepart/editdepart.component';
-
+import { NhanvienComponent } from '../nhanvien/nhanvien.component';
+import { EditemployeeComponent } from '../nhanvien/editemployee/editemployee.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
     declarations: [
         DanhmucComponent,
@@ -43,7 +49,9 @@ import { EditdepartComponent } from './phongban/editdepart/editdepart.component'
         RowdetailComponent,
         EditmdmajorsComponent,
         EditmdareasComponent,
-        EditdepartComponent
+        EditdepartComponent,
+        NhanvienComponent,
+        EditemployeeComponent
     ],
     imports: [
         CommonModule,
@@ -55,7 +63,13 @@ import { EditdepartComponent } from './phongban/editdepart/editdepart.component'
         SharedModule,
         FormsModule,
         ReactiveFormsModule,
-        MatDialogModule
+        MatDialogModule,
+        MatTabsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatFormFieldModule,
+        MatInputModule,
+        DragDropModule
     ]
 })
 export class DanhmucModule { }

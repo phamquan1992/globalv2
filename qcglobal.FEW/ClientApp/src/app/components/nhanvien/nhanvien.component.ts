@@ -4,32 +4,36 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { employee } from 'src/app/models/employee';
 import { Inputbase } from 'src/app/models/input-base';
 // import { InputDropdown } from 'src/app/models/inputdropdown';
 import { InputText } from 'src/app/models/inputtext';
 import { InputControlService } from 'src/app/services/input-control.service';
-import { mdconfig } from 'src/app/models/mdconfig'
 
 @Component({
-  selector: 'app-cauhinhht',
-  templateUrl: './cauhinhht.component.html',
-  styleUrls: ['./cauhinhht.component.css']
+  selector: 'app-nhanvien',
+  templateUrl: './nhanvien.component.html',
+  styleUrls: ['./nhanvien.component.css']
 })
-export class CauhinhhtComponent implements OnInit, AfterViewInit {
-  arr_mdconfig: mdconfig[] = [];
-  dataSource = new MatTableDataSource<mdconfig>(this.arr_mdconfig);
+export class NhanvienComponent  implements OnInit, AfterViewInit {
+  arr_employee: employee[] = [];
+  dataSource = new MatTableDataSource<employee>(this.arr_employee);
   loading$ = false;
   name_filter = '';
-  displayedColumns: string[] = ['select', 'configcode', 'configname', 'description', 'action'];
-  displayedColumns2: string[] = ['cot1', 'configcode_filter', 'configname_filter', 'description_filter','cot6'];
-  selection = new SelectionModel<mdconfig>(true, []);
+  displayedColumns: string[] = ['select', 'employeecode', 'employeename','branchname','tel','address','status','action'];
+  displayedColumns2: string[] = ['cot1', 'employeecode_filter', 'employeename_filter','branchname_filter',
+  'tel_filter', 'address_filter', 'status_filter','cot6'];
+  selection = new SelectionModel<employee>(true, []);
   arr_filter: Inputbase<string>[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   formfilter!: FormGroup;
   filter_object = {
-    configcode: '',
-    configname: '',
-    description: ''
+    employeecode: '',
+    employeename: '',
+    branchname: 1,
+    tel: '',
+    address: '',
+    status: true
   }
   constructor(private dialog: MatDialog, private controlSrv: InputControlService) {
 
@@ -50,17 +54,20 @@ export class CauhinhhtComponent implements OnInit, AfterViewInit {
     this.onchange();
   }
   get_data() {
-    this.arr_mdconfig = [];
+    this.arr_employee = [];
     for (let index = 0; index < 50; index++) {
-      let item: mdconfig = {
-        configcode: 'ma config' + (index + 1),
-        configname: 'ten config' + (index + 1),
-        description: 'mo ta' + (index + 1),
+      let item: employee = {
+        employeecode: 'ma nhan vien' + (index + 1),
+        employeename: 'ten nhan vien' + (index + 1),
+        branchname: 'cong ty 1',
+        tel: "0366883928",
+        address: 'dia chi' + (index + 1),
+        status: true,
         id: 0
       };
-      this.arr_mdconfig.push(item);
+      this.arr_employee.push(item);
     }
-    this.dataSource = new MatTableDataSource<mdconfig>(this.arr_mdconfig);
+    this.dataSource = new MatTableDataSource<employee>(this.arr_employee);
   }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -75,23 +82,23 @@ export class CauhinhhtComponent implements OnInit, AfterViewInit {
   showXoaDialog(id: any) {
 
   }
-  sua_item(gt: mdconfig) {
-    let data: mdconfig = {
-      configcode: gt.configcode,
-      configname: gt.configname,
-      description: gt.description,
+  sua_item(gt: employee) {
+    let data: employee = {
+      employeecode: gt.employeecode,
+      employeename: gt.employeename,
+      address: gt.address,
       id: gt.id
     };
     this.showEditDialog(data);
   }
-  showEditDialog(data: mdconfig) {
+  showEditDialog(data: employee) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "520px";
     dialogConfig.panelClass = "pd_dialog_none";
     dialogConfig.data = data;
     dialogConfig.disableClose = true;
-    // this.dialog.open(EditmdconfigComponent, dialogConfig).afterClosed().subscribe(
+    // this.dialog.open(EditemployeeComponent, dialogConfig).afterClosed().subscribe(
     //   res => {
     //     if (res != null && res != '' && res != undefined) {
 
@@ -108,13 +115,22 @@ export class CauhinhhtComponent implements OnInit, AfterViewInit {
   applyFilter(name_filter: string, gt: any) {
     let name_tmp = name_filter.split('_')[0];
     if (name_tmp === 'code') {
-      this.filter_object.configcode = gt.value;
+      this.filter_object.employeecode = gt.value;
     }
     if (name_tmp === 'name') {
-      this.filter_object.configname = gt.value;
+      this.filter_object.employeename = gt.value;
+    }
+    if (name_tmp === 'branchname') {
+      this.filter_object.branchname = gt.value;
+    }
+    if (name_tmp === 'tel') {
+      this.filter_object.tel = gt.value;
+    }
+    if (name_tmp === 'address') {
+      this.filter_object.address = gt.value;
     }
     if (name_tmp === 'status') {
-      this.filter_object.description = gt.value;
+      this.filter_object.address = gt.value;
     }
     this.dataSource.filter = JSON.stringify(this.filter_object);
     this.dataSource.paginator = this.paginator;
@@ -195,21 +211,42 @@ export class CauhinhhtComponent implements OnInit, AfterViewInit {
   set_data() {
     let dataIP: Inputbase<string>[] = [
       new InputText({
-        key: 'configcode',
+        key: 'employeecode',
         label: '',
         value: '',
         required: false,
         order: 1
       }),
       new InputText({
-        key: 'configname',
+        key: 'employeename',
         label: '',
         value: '',
         required: false,
         order: 2
       }),
       new InputText({
-        key: 'description',
+        key: 'branchname',
+        label: '',
+        value: '',
+        required: false,
+        order: 2
+      }),
+      new InputText({
+        key: 'tel',
+        label: '',
+        value: '',
+        required: false,
+        order: 2
+      }),
+      new InputText({
+        key: 'address',
+        label: '',
+        value: '',
+        required: false,
+        order: 2
+      }),
+      new InputText({
+        key: 'status',
         label: '',
         value: '',
         required: false,
@@ -220,4 +257,3 @@ export class CauhinhhtComponent implements OnInit, AfterViewInit {
   }
 
 }
-

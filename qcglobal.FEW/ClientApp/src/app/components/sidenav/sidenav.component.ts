@@ -25,7 +25,7 @@ export class SidenavComponent {
         { title: 'Danh mục cấu hình hệ thống', icon: 'fa fa-cog', url: '/danhmuc/cauhinhht' },
       ]
     },
-    { title: 'Quản lý nhân viên', icon: 'fa fa-user' },
+    { title: 'Quản lý nhân viên', icon: 'fa fa-user', url: '/danhmuc/nhanvien' },
     {
       title: 'Quản lý khách hàng', icon: 'fa fa-shopping-basket', submenu: true, submenuItem: [
         { title: 'Nhập dữ liêu', icon: 'fa fa-pencil-square',url: '/qlkhachhang/nhapdulieu' },

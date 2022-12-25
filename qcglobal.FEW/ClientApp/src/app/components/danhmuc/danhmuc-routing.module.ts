@@ -10,7 +10,8 @@ import { KhachhangComponent } from './khachhang/khachhang.component';
 import { NhomqlyComponent } from './nhomqly/nhomqly.component';
 import { PhongbanComponent } from './phongban/phongban.component';
 import { PldichvuComponent } from './pldichvu/pldichvu.component';
-
+import { NhanvienComponent } from '../nhanvien/nhanvien.component';
+import { EditemployeeComponent } from '../nhanvien/editemployee/editemployee.component'
 const routes: Routes = [{
   path: '', component: DanhmucComponent,
   children: [
@@ -23,6 +24,8 @@ const routes: Routes = [{
     { path: 'khachhang', component: KhachhangComponent },
     { path: 'nhomqly', component: NhomqlyComponent },
     { path: 'pldichvu', component: PldichvuComponent },
+    { path: 'nhanvien', component: NhanvienComponent},
+    {path: 'nhanvien/editnhanvien', component: EditemployeeComponent}
   ]
 }];
 
