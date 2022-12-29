@@ -1,3 +1,4 @@
+import { EditcustomerComponent } from './editcustomer/editcustomer.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
@@ -97,18 +98,17 @@ export class KhachhangComponent implements OnInit, AfterViewInit {
   showEditDialog(data: mdcustomer) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "520px";
+    dialogConfig.width = "680px";
     dialogConfig.panelClass = "pd_dialog_none";
     dialogConfig.data = data;
     dialogConfig.disableClose = true;
-    // this.dialog.open(EditdonviComponent, dialogConfig).afterClosed().subscribe(
-    //   res => {
-    //     if (res != null && res != '' && res != undefined) {
-
-    //     }
-    //   }
-    // );
-    // this.row_expand = this.row_expand === data ? null as unknown as mdcustomer: data;    
+    this.dialog.open(EditcustomerComponent, dialogConfig).afterClosed().subscribe(
+      res => {
+        if (res != null && res != '' && res != undefined) {
+        }
+      }
+    );
+    this.row_expand = this.row_expand === data ? null as unknown as mdcustomer: data;
   }
   get_item(gt: mdcustomer) {
     let index = this.arr_slect.findIndex(t => t.id == gt.id);
@@ -148,7 +148,13 @@ export class KhachhangComponent implements OnInit, AfterViewInit {
 
   }
   them_moi() {
-
+    let tmp: mdcustomer = {
+      id: 0,
+      objectcode: '',
+      objectname: '',
+      description: ''
+    };
+    this.showEditDialog(tmp);
   }
   createFilter() {
     let filterFunction = function (data: any, filter: string): boolean {

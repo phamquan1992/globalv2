@@ -1,3 +1,4 @@
+import { EditteamComponent } from './editteam/editteam.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -91,13 +92,13 @@ export class NhomqlyComponent implements OnInit, AfterViewInit {
     dialogConfig.panelClass = "pd_dialog_none";
     dialogConfig.data = data;
     dialogConfig.disableClose = true;
-    // this.dialog.open(EditmdteamsComponent, dialogConfig).afterClosed().subscribe(
-    //   res => {
-    //     if (res != null && res != '' && res != undefined) {
+    this.dialog.open(EditteamComponent, dialogConfig).afterClosed().subscribe(
+      res => {
+        if (res != null && res != '' && res != undefined) {
 
-    //     }
-    //   }
-    // );
+        }
+      }
+    );
   }
   onchange() {
     this.formfilter.valueChanges.subscribe(val => {
@@ -123,7 +124,13 @@ export class NhomqlyComponent implements OnInit, AfterViewInit {
 
   }
   them_moi() {
-
+    let tmp: mdteams = {
+      id: 0,
+      teamcode: '',
+      teamname: '',
+      description: ''
+    };
+    this.showEditDialog(tmp);
   }
   createFilter() {
     let filterFunction = function (data: any, filter: string): boolean {

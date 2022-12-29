@@ -1,3 +1,4 @@
+import { EditservicetypeComponent } from './editservicetype/editservicetype.component';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -91,13 +92,13 @@ export class PldichvuComponent implements OnInit, AfterViewInit {
     dialogConfig.panelClass = "pd_dialog_none";
     dialogConfig.data = data;
     dialogConfig.disableClose = true;
-    // this.dialog.open(EditmdtypeserviceComponent, dialogConfig).afterClosed().subscribe(
-    //   res => {
-    //     if (res != null && res != '' && res != undefined) {
+    this.dialog.open(EditservicetypeComponent, dialogConfig).afterClosed().subscribe(
+      res => {
+        if (res != null && res != '' && res != undefined) {
 
-    //     }
-    //   }
-    // );
+        }
+      }
+    );
   }
   onchange() {
     this.formfilter.valueChanges.subscribe(val => {
@@ -123,7 +124,14 @@ export class PldichvuComponent implements OnInit, AfterViewInit {
 
   }
   them_moi() {
+    let tmp: mdtypeservice = {
+      id: 0,
+      servicecode: '',
+      servicename: '',
+      description: ''
 
+    };
+    this.showEditDialog(tmp);
   }
   createFilter() {
     let filterFunction = function (data: any, filter: string): boolean {

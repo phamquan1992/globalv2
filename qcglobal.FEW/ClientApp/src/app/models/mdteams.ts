@@ -3,4 +3,5 @@ export interface mdteams {
   teamcode: string;
   teamname: string;
   description: string;
+  leaderid?: number;
 }

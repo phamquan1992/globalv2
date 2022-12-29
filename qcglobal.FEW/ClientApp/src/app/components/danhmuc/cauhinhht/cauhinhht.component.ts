@@ -9,6 +9,7 @@ import { Inputbase } from 'src/app/models/input-base';
 import { InputText } from 'src/app/models/inputtext';
 import { InputControlService } from 'src/app/services/input-control.service';
 import { mdconfig } from 'src/app/models/mdconfig'
+import {EditconfigComponent} from './editconfig/editconfig.component'
 
 @Component({
   selector: 'app-cauhinhht',
@@ -91,13 +92,13 @@ export class CauhinhhtComponent implements OnInit, AfterViewInit {
     dialogConfig.panelClass = "pd_dialog_none";
     dialogConfig.data = data;
     dialogConfig.disableClose = true;
-    // this.dialog.open(EditmdconfigComponent, dialogConfig).afterClosed().subscribe(
-    //   res => {
-    //     if (res != null && res != '' && res != undefined) {
+    this.dialog.open(EditconfigComponent, dialogConfig).afterClosed().subscribe(
+      res => {
+        if (res != null && res != '' && res != undefined) {
 
-    //     }
-    //   }
-    // );
+        }
+      }
+    );
   }
   onchange() {
     this.formfilter.valueChanges.subscribe(val => {
@@ -123,7 +124,14 @@ export class CauhinhhtComponent implements OnInit, AfterViewInit {
 
   }
   them_moi() {
+    let tmp: mdconfig = {
+      id: 0,
+      configcode: '',
+      configname: '',
+      description: ''
 
+    };
+    this.showEditDialog(tmp);
   }
   createFilter() {
     let filterFunction = function (data: any, filter: string): boolean {

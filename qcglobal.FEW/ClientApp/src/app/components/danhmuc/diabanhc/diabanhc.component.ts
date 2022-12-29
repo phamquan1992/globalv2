@@ -126,7 +126,13 @@ export class DiabanhcComponent implements OnInit, AfterViewInit {
 
   }
   them_moi() {
-
+    let tmp: mdareas = {
+      code: '',
+      name: '',
+      parent: '',
+      levelion: 0
+    };
+    this.showEditDialog(tmp);
   }
   createFilter() {
     let filterFunction = function (data: any, filter: string): boolean {

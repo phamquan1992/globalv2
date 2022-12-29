@@ -32,6 +32,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { EditconfigComponent } from './cauhinhht/editconfig/editconfig.component';
+import { EditservicetypeComponent } from './pldichvu/editservicetype/editservicetype.component';
+import { EditteamComponent } from './nhomqly/editteam/editteam.component';
+import { EditcustomerComponent } from './khachhang/editcustomer/editcustomer.component';
 @NgModule({
     declarations: [
         DanhmucComponent,
@@ -51,7 +55,11 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         EditmdareasComponent,
         EditdepartComponent,
         NhanvienComponent,
-        EditemployeeComponent
+        EditemployeeComponent,
+        EditconfigComponent,
+        EditservicetypeComponent,
+        EditteamComponent,
+        EditcustomerComponent
     ],
     imports: [
         CommonModule,
