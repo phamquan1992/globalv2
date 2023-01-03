@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [{ path: 'danhmuc', loadChildren: () => import('./components/danhmuc/danhmuc.module').then(m => m.DanhmucModule) },
 { path: 'home', component: HomeComponent },
+{ path: 'qlhethong', loadChildren: () => import('./components/qlhethong/qlhethong.module').then(m => m.QlhethongModule) },
 //{ path: 'editnhanvien', component: EditemployeeComponent },
 { path: '', redirectTo: 'home', pathMatch: 'full' },
 { path: 'qlkhachhang', loadChildren: () => import('./components/qlkhachhang/qlkhachhang.module').then(m => m.QlkhachhangModule) }];

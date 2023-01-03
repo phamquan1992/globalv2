@@ -46,11 +46,11 @@ export class SidenavComponent {
     {
       title: 'Quản lý hệ thống', icon: 'fa fa-server', submenu: true, submenuItem: [
         { title: 'Quản lý người dùng', icon: 'fa fa-user' },
-        { title: 'Quản lý chức năng', icon: 'fa fa-list-ul' },
-        { title: 'Quản lý tác vụ, quyền hạn', icon: 'fa fa-list-ol' },
-        { title: 'Quản lý vai trò', icon: 'fa fa-book' },
-        { title: 'Quản lý phạm vi dữ liệu', icon: 'fa fa-compass' },
-        { title: 'Lịch sử người dùng hệ thống', icon: 'fa fa-history' },
+        { title: 'Quản lý chức năng', icon: 'fa fa-list-ul', url: '/qlhethong/chucnang' },
+        { title: 'Quản lý tác vụ, quyền hạn', icon: 'fa fa-list-ol', url: '/qlhethong/tacvu' },
+        { title: 'Quản lý vai trò', icon: 'fa fa-book', url: '/qlhethong/vaitro' },
+        { title: 'Quản lý phạm vi dữ liệu', icon: 'fa fa-compass'},
+        { title: 'Lịch sử người dùng hệ thống', icon: 'fa fa-history', url: '/qlhethong/logsystem'  },
       ]
     },
   ];
