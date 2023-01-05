@@ -45,6 +45,7 @@ namespace qcglobal.FEW
             services.AddScoped<ImdteamsRepository, mdteamsRepository>();
             services.AddScoped<ImdtypeserviceRepository, mdtypeserviceRepository>();
             services.AddScoped<ItitleRepository, titleRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             #endregion
 
             #region Services
@@ -58,6 +59,7 @@ namespace qcglobal.FEW
             services.AddScoped<ImdteamsService, mdteamsService>();
             services.AddScoped<ImdtypeserviceService, mdtypeserviceService>();
             services.AddScoped<ItitleService, titleService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
             #endregion
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory

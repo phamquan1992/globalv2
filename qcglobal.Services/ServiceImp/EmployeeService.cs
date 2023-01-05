@@ -1,6 +1,5 @@
 ﻿using qcglobal.Core.Domain;
 using qcglobal.Repositories.IRepository;
-using qcglobal.Repositories.Repository;
 using qcglobal.Services.ISerivce;
 using System;
 using System.Collections.Generic;
@@ -9,20 +8,23 @@ using System.Text;
 
 namespace qcglobal.Services.ServiceImp
 {
-    public class mdteamsService : BaseService<mdteams>, ImdteamsService
+    public class EmployeeService : BaseService<Employee>, IEmployeeService
     {
         #region declare
 
-        ImdteamsRepository _mdteamsRepository;
+        IEmployeeRepository _employeeRepository;
 
         #endregion
 
         #region contructor
-        public mdteamsService(ImdteamsRepository mdteamsRepository) : base(mdteamsRepository)
+        public EmployeeService(IEmployeeRepository employeeRepository) : base(employeeRepository)
         {
-            _mdteamsRepository = mdteamsRepository;
+            _employeeRepository = employeeRepository;
         }
 
         #endregion
+
+
+       
     }
 }
