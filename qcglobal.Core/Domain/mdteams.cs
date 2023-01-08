@@ -19,8 +19,8 @@ namespace qcglobal.Core.Domain
         [DisplayName("Tên nhóm")]
         public virtual string teamname { get; set; }
         public virtual string description { get; set; }
-        public virtual int? leaderid { get; set; }
-        public virtual int? userid { get; set; }
+        public virtual int leaderid { get; set; } = 0;
+        public virtual int userid { get; set; } = 0 ;
         public virtual bool isactive { get; set; }
         public virtual int? created_by { get; set; }
         public virtual DateTime? created_date { get; set; }

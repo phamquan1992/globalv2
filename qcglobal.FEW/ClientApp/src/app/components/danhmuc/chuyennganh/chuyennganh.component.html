@@ -65,6 +65,22 @@
                 </td>
             </ng-container>
 
+            <ng-container matColumnDef="isactive">
+              <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold w-[120px]">
+                  Trạng thái
+              </th>
+              <td mat-cell *matCellDef="let element" class="break-all text-center" style="padding: 4px;"
+                  [ngSwitch]="element.isactive">
+                  <span class="mobile-label">Trạng thái:</span>
+                  <span
+                      class="text-xs text-center mobile-span border border-solid border-[#b7eb8f] text-[#52c41a] bg-[#f6ffed] block"
+                      *ngSwitchCase="true">Kích hoạt</span>
+                  <span
+                      class="text-xs text-center mobile-span border border-solid border-[#ffa39e] text-[#f5222d] bg-[#fff1f0] block"
+                      *ngSwitchCase="false">Huỷ kích hoạt</span>
+              </td>
+          </ng-container>
+
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold w-[100px] ">
                     Hành động</th>

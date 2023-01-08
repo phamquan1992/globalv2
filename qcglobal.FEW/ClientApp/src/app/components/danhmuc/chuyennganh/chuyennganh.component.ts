@@ -25,8 +25,8 @@ export class ChuyennganhComponent implements OnInit, AfterViewInit {
   name_filter = '';
   arr_temp: { key: string, value: string }[] = [];
   arr_filter: Inputbase<string>[] = [];
-  displayedColumns: string[] = ['select', 'majorscode', 'majorsname', 'description', 'action'];
-  displayedColumns2: string[] = ['cot1', 'majorscode_filter', 'majorsname_filter', 'description_filter', 'cot6'];
+  displayedColumns: string[] = ['select', 'majorscode', 'majorsname', 'description', 'isactive', 'action'];
+  displayedColumns2: string[] = ['cot1', 'majorscode_filter', 'majorsname_filter', 'description_filter', 'isactive_filter', 'cot6'];
   selection = new SelectionModel<mdmajors>(true, []);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   formfilter!: FormGroup;
@@ -35,7 +35,7 @@ export class ChuyennganhComponent implements OnInit, AfterViewInit {
     majorsname: '',
     description: ''
   }
-  constructor(private dialog: MatDialog, private mdmajorsSrv: MdmajorsService, private controlSrv: InputControlService,private messSrv: MessageService,) {
+  constructor(private dialog: MatDialog, private mdmajorsSrv: MdmajorsService, private controlSrv: InputControlService, private messSrv: MessageService,) {
 
   }
   ngAfterViewInit(): void {
@@ -175,7 +175,8 @@ export class ChuyennganhComponent implements OnInit, AfterViewInit {
       id: gt.id,
       majorscode: gt.majorscode,
       majorsname: gt.majorsname,
-      description: gt.description
+      description: gt.description,
+      isactive: gt.isactive
     };
     this.showEditDialog(data);
   }
@@ -218,7 +219,8 @@ export class ChuyennganhComponent implements OnInit, AfterViewInit {
       id: 0,
       majorscode: '',
       majorsname: '',
-      description: ''
+      description: '',
+      isactive: false
     };
     this.showEditDialog(tmp);
   }
@@ -227,10 +229,22 @@ export class ChuyennganhComponent implements OnInit, AfterViewInit {
       let searchTerms = JSON.parse(filter);
       let isFilterSet = false;
       for (const col in searchTerms) {
-        if (searchTerms[col].toString() !== '') {
-          isFilterSet = true;
+        if (col !== 'isactive') {
+          if (searchTerms[col].toString() !== '') {
+            isFilterSet = true;
+          } else {
+            delete searchTerms[col];
+          }
         } else {
-          delete searchTerms[col];
+          if (searchTerms[col]['key'] !== undefined) {
+            if (searchTerms[col]['key'].toString() !== '') {
+              isFilterSet = true;
+            } else {
+              delete searchTerms[col];
+            }
+          } else {
+            delete searchTerms[col];
+          }
         }
       }
 
@@ -239,14 +253,29 @@ export class ChuyennganhComponent implements OnInit, AfterViewInit {
           let arr: boolean[] = [];
           let found = false;
           for (const col in searchTerms) {
-
-            let filter_str = data[col] || '';
-            if (filter_str.toString().toLowerCase().indexOf(searchTerms[col].trim().toLowerCase()) != -1 && isFilterSet) {
-              found = true
-            } else {
-              found = false;
+            if (col !== 'isactive') {
+              let filter_str = data[col] || '';
+              if (filter_str.toString().toLowerCase().indexOf(searchTerms[col].trim().toLowerCase()) != -1 && isFilterSet) {
+                found = true
+              } else {
+                found = false;
+              }
+              arr.push(found);
             }
-            arr.push(found);
+            else {
+              let filter2 = data[col] == null ? '' : data[col].toString();
+              if (searchTerms[col]['key'].toString() !== 'all' && isFilterSet) {
+                if (filter2 == searchTerms[col]['key'].toString()) {
+                  found = true
+                } else {
+                  found = false
+                }
+              }
+              else {
+                found = true;
+              }
+              arr.push(found);
+            }
           }
           let count_array = arr.findIndex(t => t == false);
           arr = [];

@@ -4,4 +4,5 @@ export interface mdteams {
   teamname: string;
   description: string;
   leaderid?: number;
+  isactive?: boolean;
 }
