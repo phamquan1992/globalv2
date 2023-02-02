@@ -44,8 +44,35 @@ namespace qcglobal.Services.ServiceImp
             // validate dữ liệu
             var isValidate = Validate(entity);
             if (isValidate == true)
-            {               
+            {
                 if (_baseRepository.Add(entity))
+                {
+                    _serviceResult.Data = true;
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.IsValid;
+                }
+                else
+                {
+                    _serviceResult.Data = false;
+                    _serviceResult.Message = "Đã có lỗi sảy ra!";
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.NotValid;
+                }
+            }
+            return _serviceResult;
+        }
+        public virtual ServiceResult AddRange(IEnumerable<TEntity> entity)
+        {
+            // validate dữ liệu
+            bool isValidate = true;
+            foreach (var item in entity)
+            {
+                isValidate = Validate(item);
+                if (!isValidate)
+                    break;
+            }
+
+            if (isValidate == true)
+            {
+                if (_baseRepository.AddRange(entity))
                 {
                     _serviceResult.Data = true;
                     _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.IsValid;
@@ -76,12 +103,52 @@ namespace qcglobal.Services.ServiceImp
                     _serviceResult.Message = "Đã có lỗi sảy ra!";
                     _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.NotValid;
                 }
-                
+
             }
             return _serviceResult;
         }
+        public virtual ServiceResult UpdateRange(IEnumerable<TEntity> entity)
+        {
+            bool isValidate = true;
+            foreach (var item in entity)
+            {
+                isValidate = Validate(item);
+                if (!isValidate)
+                    break;
+            }
+            if (isValidate)
+            {
+                if (_baseRepository.UpdateRange(entity))
+                {
+                    _serviceResult.Data = true;
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.IsValid;
+                }
+                else
+                {
+                    _serviceResult.Data = false;
+                    _serviceResult.Message = "Đã có lỗi sảy ra!";
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.NotValid;
+                }
 
-        public ServiceResult Delete(List<int> ids)
+            }
+            return _serviceResult;
+        }
+        public ServiceResult Delete(int ids)
+        {
+            var entity = _baseRepository.FindBy(x => (int)GetKeyValueOfEntity(x) == ids);
+            if (entity != null)
+            {
+                //var entity = _baseRepository.FindBy(x => ids.Contains((int)GetKeyValueOfEntity(x)));
+                _serviceResult.Data = _baseRepository.Delete(entity);
+            }
+            else
+            {
+                _serviceResult.Data = false;
+                _serviceResult.Message = "khong co du lieu";
+            }
+            return _serviceResult;
+        }
+        public ServiceResult DeleteRange(List<int> ids)
         {
             if (ids != null && ids.Count > 0)
             {
@@ -92,9 +159,152 @@ namespace qcglobal.Services.ServiceImp
             else
             {
                 _serviceResult.Data = false;
-                _serviceResult.Message= "khong co du lieu";
+                _serviceResult.Message = "khong co du lieu";
             }
-            return _serviceResult;            
+            return _serviceResult;
+        }
+
+        //CRUD Transaction
+        public void BeginTran()
+        {
+            _baseRepository.BeginTran();
+        }
+        public void CommintTran()
+        {
+            _baseRepository.CommintTran();
+        }
+        public void RollBackTran()
+        {
+            _baseRepository.RollBackTran();
+        }
+        public void Clear()
+        {
+            _baseRepository.Clear();
+        }
+        public virtual ServiceResult AddTran(TEntity entity)
+        {
+            // validate dữ liệu
+            var isValidate = Validate(entity);
+            if (isValidate == true)
+            {
+                if (_baseRepository.AddTran(entity))
+                {
+                    _serviceResult.Data = true;
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.IsValid;
+                }
+                else
+                {
+                    _serviceResult.Data = false;
+                    _serviceResult.Message = "Đã có lỗi sảy ra!";
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.NotValid;
+                }
+
+            }
+            return _serviceResult;
+        }
+        public virtual ServiceResult AddRangeTran(IEnumerable<TEntity> entity)
+        {
+            // validate dữ liệu
+            bool isValidate = true;
+            foreach (var item in entity)
+            {
+                isValidate = Validate(item);
+                if (!isValidate)
+                    break;
+            }
+
+            if (isValidate == true)
+            {
+                if (_baseRepository.AddRangeTran(entity))
+                {
+                    _serviceResult.Data = true;
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.IsValid;
+                }
+                else
+                {
+                    _serviceResult.Data = false;
+                    _serviceResult.Message = "Đã có lỗi sảy ra!";
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.NotValid;
+                }
+            }
+            return _serviceResult;
+        }
+
+        public virtual ServiceResult UpdateTran(TEntity entity)
+        {
+            var isValidate = Validate(entity);
+            if (isValidate)
+            {
+                if (_baseRepository.UpdateTran(entity))
+                {
+                    _serviceResult.Data = true;
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.IsValid;
+                }
+                else
+                {
+                    _serviceResult.Data = false;
+                    _serviceResult.Message = "Đã có lỗi sảy ra!";
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.NotValid;
+                }
+
+            }
+            return _serviceResult;
+        }
+        public virtual ServiceResult UpdateRangeTran(IEnumerable<TEntity> entity)
+        {
+            bool isValidate = true;
+            foreach (var item in entity)
+            {
+                isValidate = Validate(item);
+                if (!isValidate)
+                    break;
+            }
+            if (isValidate)
+            {
+                if (_baseRepository.UpdateRangeTran(entity))
+                {
+                    _serviceResult.Data = true;
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.IsValid;
+                }
+                else
+                {
+                    _serviceResult.Data = false;
+                    _serviceResult.Message = "Đã có lỗi sảy ra!";
+                    _serviceResult.QCGlobalCode = QCGlobalEnum.QCGlobalCode.NotValid;
+                }
+
+            }
+            return _serviceResult;
+        }
+        public ServiceResult DeleteTran(int ids)
+        {
+            var entity = _baseRepository.FindBy(x => (int)GetKeyValueOfEntity(x) == ids);
+            if (entity != null)
+            {
+                //var entity = _baseRepository.FindBy(x => ids.Contains((int)GetKeyValueOfEntity(x)));
+                _serviceResult.Data = _baseRepository.DeleteTran(entity);
+            }
+            else
+            {
+                _serviceResult.Data = false;
+                _serviceResult.Message = "khong co du lieu";
+            }
+            return _serviceResult;
+        }
+        public ServiceResult DeleteRangeTran(List<int> ids)
+        {
+            if (ids != null && ids.Count > 0)
+            {
+                ids = ids.Distinct().ToList();
+                var entity = _baseRepository.GetAll().ToList().Where(x => ids.Contains((int)GetKeyValueOfEntity(x)));
+                _serviceResult.Data = _baseRepository.DeleteRangeTran(entity);
+            }
+            else
+            {
+                _serviceResult.Data = false;
+                _serviceResult.Message = "khong co du lieu";
+            }
+            return _serviceResult;
         }
 
         /// <summary>
@@ -107,7 +317,7 @@ namespace qcglobal.Services.ServiceImp
             var result = -1;
             var properties = entity.GetType().GetProperties();
             foreach (var property in properties)
-            {             
+            {
                 if (property.IsDefined(typeof(Key), false))
                 {
                     var value = property.GetValue(entity);
@@ -131,7 +341,7 @@ namespace qcglobal.Services.ServiceImp
             // lấy các property
             var properties = entity.GetType().GetProperties();
             int id = 0;
-            
+
             // đọc các property
             foreach (var property in properties)
             {
@@ -174,7 +384,7 @@ namespace qcglobal.Services.ServiceImp
                         if (tempEntity != null)
                         {
                             isValidate = false;
-                            msgArrayError.Add(string.Format("{0} không được phép trungf", displayName));
+                            msgArrayError.Add(string.Format("{0} không được phép trùng", displayName));
                             break;
                         }
                     }
