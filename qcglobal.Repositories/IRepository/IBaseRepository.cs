@@ -19,5 +19,15 @@ namespace qcglobal.Repositories.IRepository
         T FindBy(Expression<Func<T, bool>> expression);
         T FindBy(int id);
         IQueryable<T> FilterBy(Expression<Func<T, bool>> expression);
+        void BeginTran();
+        void CommintTran();
+        void Clear();
+        void RollBackTran();
+        bool AddTran(T entity);
+        bool AddRangeTran(IEnumerable<T> entities);
+        bool UpdateTran(T entity);
+        bool UpdateRangeTran(IEnumerable<T> entities);
+        bool DeleteTran(T entity);
+        bool DeleteRangeTran(IEnumerable<T> entities);
     }
 }

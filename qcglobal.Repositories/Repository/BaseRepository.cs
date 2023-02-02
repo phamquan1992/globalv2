@@ -2,6 +2,7 @@
 using qcglobal.Repositories.IRepository;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -10,6 +11,7 @@ namespace qcglobal.Repositories.Repository
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         private readonly ISession _session;
+        private ITransaction _transaction;
 
         public BaseRepository(ISession session)
         {
@@ -68,8 +70,6 @@ namespace qcglobal.Repositories.Repository
         public bool Update(T entity)
         {
             bool result = false;
-            // xóa session đi vì khi validate dữ liệu ở baseService, session đã đc gán giá trị nào đó
-            _session.Clear();
             using (var transaction = _session.BeginTransaction())
             {
                 try
@@ -166,6 +166,124 @@ namespace qcglobal.Repositories.Repository
             return result;
         }
 
+
+        //CRUD Transaction
+        public void BeginTran()
+        {
+            _transaction = _session.BeginTransaction(IsolationLevel.ReadCommitted);
+        }
+        public void CommintTran()
+        {
+            _transaction.Commit();
+        }
+        public void Clear()
+        {
+            _session.Clear();
+        }
+        public void RollBackTran()
+        {
+            _transaction.Rollback();
+        }
+        public bool AddTran(T entity)
+        {
+            bool result = false;
+            try
+            {
+                _session.Save(entity);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                _transaction.Rollback();
+                result = false;
+            }
+            return result;
+        }
+
+        public bool AddRangeTran(IEnumerable<T> entities)
+        {
+            bool result = false;
+            try
+            {
+                foreach (T entity in entities)
+                {
+                    _session.Save(entity);
+                }
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        public bool UpdateTran(T entity)
+        {
+            bool result = false;
+            try
+            {
+                _session.Update(entity);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        public bool UpdateRangeTran(IEnumerable<T> entities)
+        {
+            bool result = false;
+            try
+            {
+                foreach (T entity in entities)
+                {
+                    _session.Update(entity);
+                }
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        public bool DeleteTran(T entity)
+        {
+            bool result = false;
+            try
+            {
+                _session.Delete(entity);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        public bool DeleteRangeTran(IEnumerable<T> entities)
+        {
+            bool result = false;
+            try
+            {
+                foreach (T item in entities)
+                {
+                    _session.Delete(item);
+                }
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            return result;
+        }
+
         public IQueryable<T> GetAll()
         {
             IQueryable<T> data = (new List<T>()).AsQueryable();
@@ -216,6 +334,5 @@ namespace qcglobal.Repositories.Repository
             }
             return data;
         }
-
     }
 }
