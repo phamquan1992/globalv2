@@ -415,6 +415,11 @@ namespace qcglobal.Services.ServiceImp
             return true;
         }
 
+        public ServiceResult Delete(List<int> ids)
+        {
+            throw new NotImplementedException();
+        }
+
 
         #endregion
 

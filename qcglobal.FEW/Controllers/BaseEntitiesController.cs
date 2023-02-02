@@ -120,7 +120,7 @@ namespace qcglobal.FEW.Controllers
         {
             try
             {
-                var res = _baseService.Delete(ids.ToList());
+                var res = _baseService.DeleteRange(ids.ToList());
                 return Ok(res);
             }
             catch (Exception ex)

@@ -9,8 +9,6 @@ import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator'
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NhanvienComponent } from '../nhanvien/nhanvien.component';
-import { EditemployeeComponent } from '../nhanvien/editemployee/editemployee.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';

@@ -1,0 +1,6 @@
+<div class="row">
+  <div class="col-md-3">
+    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+    <button type="button" class="py-1 px-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg" (click)="file.click()">...</button>
+  </div>
+</div>

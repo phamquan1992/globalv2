@@ -1,4 +1,3 @@
-<app-loadingpage *ngIf="loading$"></app-loadingpage>
 <div #header>
   <div class="px-[1px]">
     <h3
@@ -8,30 +7,23 @@
     </h3>
   </div>
   <section class="px-[15px]">
-    <!-- <button
-            class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]"
-            (click)="them_moi()">Thêm mới</button> -->
     <button
+      class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]"
+      (click)="them_moi()"
+    >
+      Thêm mới
+    </button>
+    <!-- <button
       class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]"
       routerLink="editnhanvien"
     >
       Thêm mới
-    </button>
+    </button> -->
     <button
       (click)="showXoaDialog('')"
       class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#ff0000a6] text-white text-[13px] mr-[5px] mb-[5px]"
     >
       Xoá
-    </button>
-    <button
-      class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]"
-    >
-      Ẩn
-    </button>
-    <button
-      class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]"
-    >
-      Hiện
     </button>
   </section>
 </div>
@@ -68,7 +60,7 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="employeecode">
+      <ng-container matColumnDef="employeeCode">
         <th
           mat-header-cell
           *matHeaderCellDef
@@ -83,36 +75,36 @@
           style="padding: 4px"
         >
           <span class="mobile-label">Mã nhân viên:</span>
-          <span class="text-sm mobile-span">{{ element.employeecode }}</span>
+          <span class="text-sm mobile-span">{{ element.employeeCode }}</span>
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="employeename">
+      <ng-container matColumnDef="employeeName">
         <th
           mat-header-cell
           *matHeaderCellDef
-          class="text-[#000000d9] text-sm font-bold"
+          class="text-[#000000d9] text-sm font-bold w-[200px]"
         >
           Tên nhân viên
         </th>
         <td
           mat-cell
           *matCellDef="let element"
-          class="break-all text-center"
+          class="text-center"
           style="padding: 4px"
         >
           <span class="mobile-label">Tên nhân viên:</span>
-          <span class="text-sm mobile-span">{{ element.employeename }}</span>
+          <span class="text-sm mobile-span">{{ element.employeeName }}</span>
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="branchname">
+      <ng-container matColumnDef="mdTeamsID">
         <th
           mat-header-cell
           *matHeaderCellDef
           class="text-[#000000d9] text-sm font-bold"
         >
-          Tên công ty
+          Dự án
         </th>
         <td
           mat-cell
@@ -120,12 +112,14 @@
           class="break-all text-center"
           style="padding: 4px"
         >
-          <span class="mobile-label">Tên công ty:</span>
-          <span class="text-sm mobile-span">{{ element.branchname }}</span>
+          <span class="mobile-label">Phòng ban:</span>
+          <span class="text-sm mobile-span" *ngIf="element.mdTeamsID">
+            {{ get_parentMDteams(element.mdTeamsID) }}
+          </span>
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="tel">
+      <ng-container matColumnDef="telephone">
         <th
           mat-header-cell
           *matHeaderCellDef
@@ -140,7 +134,7 @@
           style="padding: 4px"
         >
           <span class="mobile-label">Số điện thoại:</span>
-          <span class="text-sm mobile-span">{{ element.tel }}</span>
+          <span class="text-sm mobile-span">{{ element.telephone }}</span>
         </td>
       </ng-container>
 
@@ -164,18 +158,31 @@
       </ng-container>
 
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold w-[120px]">
-            Trạng thái
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="text-[#000000d9] text-sm font-bold w-[120px]"
+        >
+          Trạng thái
         </th>
-        <td mat-cell *matCellDef="let element" class="break-all text-center" style="padding: 4px;"
-            [ngSwitch]="element.status">
-            <span class="mobile-label">Trạng thái:</span>
-            <span
-                class="text-xs text-center mobile-span border border-solid border-[#b7eb8f] text-[#52c41a] bg-[#f6ffed] block"
-                *ngSwitchCase="true">đang làm việc</span>
-            <span
-                class="text-xs text-center mobile-span border border-solid border-[#ffa39e] text-[#f5222d] bg-[#fff1f0] block"
-                *ngSwitchCase="false">đã nghỉ việc</span>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="break-all text-center"
+          style="padding: 4px"
+          [ngSwitch]="element.status"
+        >
+          <span class="mobile-label">Trạng thái:</span>
+          <span
+            class="text-xs text-center mobile-span border border-solid border-[#b7eb8f] text-[#52c41a] bg-[#f6ffed] block"
+            *ngSwitchCase="true"
+            >đang làm việc</span
+          >
+          <span
+            class="text-xs text-center mobile-span border border-solid border-[#ffa39e] text-[#f5222d] bg-[#fff1f0] block"
+            *ngSwitchCase="false"
+            >đã nghỉ việc</span
+          >
         </td>
       </ng-container>
 
@@ -194,22 +201,24 @@
           style="padding: 4px"
         >
           <i
+            (click)="showXoaDialog(element.id)"
             class="fa fa-trash-o px-[4px] cursor-pointer text-red-600"
             aria-hidden="true"
-            [matTooltip]="'Xoá team'"
+            [matTooltip]="'Xoá nhân viên'"
             [matTooltipPosition]="'above'"
             style="font-size: 18px"
           ></i>
           <i
             class="fa fa-link px-[4px] cursor-pointer text-blue-600 -rotate-[85deg]"
             aria-hidden="true"
-            [matTooltip]="'Chi tiết team'"
+            [matTooltip]="'Chi tiết nhân viên'"
             [matTooltipPosition]="'above'"
             style="font-size: 18px"
             (click)="sua_item(element)"
           ></i>
         </td>
       </ng-container>
+
       <div>
         <ng-container
           *ngFor="let it of displayedColumns2; let i = index"
@@ -250,6 +259,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </section>
+
   <mat-paginator
     [pageSizeOptions]="[10, 20, 50, 100, 200]"
     showFirstLastButtons

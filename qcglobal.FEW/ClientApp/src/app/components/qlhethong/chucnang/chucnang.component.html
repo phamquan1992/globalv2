@@ -11,10 +11,10 @@
             (click)="them_moi()">Thêm mới</button>
         <button (click)="showXoaDialog('')"
             class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#ff0000a6] text-white text-[13px] mr-[5px] mb-[5px]">Xoá</button>
-        <button
+        <!-- <button
             class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]">Ẩn</button>
         <button
-            class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]">Hiện</button>
+            class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] bg-[#196898] text-white text-[13px] mr-[5px] mb-[5px]">Hiện</button> -->
 
     </section>
 </div>
@@ -36,46 +36,45 @@
                     </mat-checkbox>
                 </td>
             </ng-container>
-            <ng-container matColumnDef="code">
+            <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold  w-[200px]">
-                    Mã chức năng
+                    Tên chức năng
                 </th>
                 <td mat-cell *matCellDef="let element" class=" text-center" style="padding: 4px;">
-                    <span class="mobile-label">Mã chức năng:</span>
-                    <span class="text-sm mobile-span ml-1">{{element.code}}</span>
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold ">Tên
-                    chức năng</th>
-                <td mat-cell *matCellDef="let element" class=" break-all text-center" style="padding: 4px;">
                     <span class="mobile-label">Tên chức năng:</span>
-                    <span class="text-sm mobile-span ml-1">{{element.name}}</span>
+                    <span class="text-sm mobile-span">{{element.name}}</span>
                 </td>
             </ng-container>
 
-            <ng-container matColumnDef="categoryfunctionid">
-              <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold w-[140px]">
-                  Nhóm chức năng
-              </th>
-              <td mat-cell *matCellDef="let element" class="break-all text-center" style="padding: 4px;"
-                  [ngSwitch]="element.categoryfunctionid">
-                  <span class="mobile-label">Nhóm chức năng:</span>
-                  <span
-                  class="text-sm mobile-span ml-1"
-                      *ngSwitchCase="1">nhom 1</span>
-                  <span
-                  class="text-sm mobile-span ml-1"
-                      *ngSwitchCase="2">nhom 2</span>
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold ">Mô tả</th>
+              <td mat-cell *matCellDef="let element" class=" break-all text-center" style="padding: 4px;">
+                  <span class="mobile-label">Mô tả:</span>
+                  <span class="text-sm mobile-span">{{element.description}}</span>
               </td>
           </ng-container>
+
+          <ng-container matColumnDef="isactive">
+            <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold w-[140px]">
+                Trạng thái
+            </th>
+            <td mat-cell *matCellDef="let element" class="break-all text-center" style="padding: 4px;"
+                [ngSwitch]="element.active">
+                <span class="mobile-label">Trạng thái:</span>
+                <span
+                    class="text-xs text-center mobile-span border border-solid border-[#b7eb8f] text-[#52c41a] bg-[#f6ffed] block"
+                    *ngSwitchCase="true">Kích hoạt</span>
+                <span
+                    class="text-xs text-center mobile-span border border-solid border-[#ffa39e] text-[#f5222d] bg-[#fff1f0] block"
+                    *ngSwitchCase="false">Huỷ kích hoạt</span>
+            </td>
+        </ng-container>
 
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm font-bold w-[100px] ">
                     Hành động</th>
                 <td mat-cell *matCellDef="let element" class=" break-all text-center" style="padding: 4px;">
-                    <i class="fa fa-trash-o px-[4px] cursor-pointer text-red-600" aria-hidden="true"
+                    <i (click)="showXoaDialog(element.id)" class="fa fa-trash-o px-[4px] cursor-pointer text-red-600" aria-hidden="true"
                         [matTooltip]="'Xoá chức năng'" [matTooltipPosition]="'above'"
                         style="font-size: 18px;"></i>
                     <i class="fa fa-link px-[4px] cursor-pointer text-blue-600 -rotate-[85deg]" aria-hidden="true"
@@ -87,6 +86,9 @@
                 <ng-container *ngFor="let it of displayedColumns2;let i= index" [matColumnDef]="it">
                     <th mat-header-cell *matHeaderCellDef class=" text-[#000000d9] text-sm"
                         style="border-top: none !important;">
+                        <!-- <input *ngIf="i!==0 && i!=displayedColumns2.length-1" class="outline-none w-full" type="text"
+                            [formControlName]="it" (keyup)="applyFilter(it,$event.target)"
+                            placeholder="Nhập thông tin tìm kiếm"> -->
                         <app-filterrow *ngIf="i!==0 && i!=displayedColumns2.length-1" [iteminput]="arr_filter[i-1]"
                             [form]="formfilter">
                         </app-filterrow>

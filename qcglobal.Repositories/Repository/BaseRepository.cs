@@ -70,6 +70,8 @@ namespace qcglobal.Repositories.Repository
         public bool Update(T entity)
         {
             bool result = false;
+            // xóa session đi vì khi validate dữ liệu ở baseService, session đã đc gán giá trị nào đó
+            _session.Clear();
             using (var transaction = _session.BeginTransaction())
             {
                 try

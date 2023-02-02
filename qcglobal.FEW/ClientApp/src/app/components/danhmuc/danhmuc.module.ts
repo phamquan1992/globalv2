@@ -36,6 +36,7 @@ import { EditconfigComponent } from './cauhinhht/editconfig/editconfig.component
 import { EditservicetypeComponent } from './pldichvu/editservicetype/editservicetype.component';
 import { EditteamComponent } from './nhomqly/editteam/editteam.component';
 import { EditcustomerComponent } from './khachhang/editcustomer/editcustomer.component';
+import { UploadimageComponent } from '../uploadimage/uploadimage.component';
 @NgModule({
     declarations: [
         DanhmucComponent,
@@ -59,7 +60,8 @@ import { EditcustomerComponent } from './khachhang/editcustomer/editcustomer.com
         EditconfigComponent,
         EditservicetypeComponent,
         EditteamComponent,
-        EditcustomerComponent
+        EditcustomerComponent,
+        UploadimageComponent
     ],
     imports: [
         CommonModule,
