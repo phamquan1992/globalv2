@@ -7,8 +7,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Inputbase } from 'src/app/models/input-base';
 import { InputDropdown } from 'src/app/models/inputdropdown';
 import { InputText } from 'src/app/models/inputtext';
-import { sys_permission } from 'src/app/models/sys_permission';
+import { permission } from 'src/app/models/permission';
 import { InputControlService } from 'src/app/services/input-control.service';
+import { MessageService } from 'src/app/services/message.service';
+import { PermissionService } from 'src/app/services/permission.service';
 
 @Component({
   selector: 'app-editsys-permission',
@@ -16,54 +18,53 @@ import { InputControlService } from 'src/app/services/input-control.service';
   styleUrls: ['./editsys-permission.component.css']
 })
 export class EditsysPermissionComponent  {
-  constructor(public dialogRef: MatDialogRef<EditsysPermissionComponent>, @Inject(MAT_DIALOG_DATA) public data: sys_permission, private controlSrv: InputControlService) {
+  constructor(public dialogRef: MatDialogRef<EditsysPermissionComponent>, @Inject(MAT_DIALOG_DATA) public data: permission,private messageSrv: MessageService,
+   private controlSrv: InputControlService,private permissionSrv: PermissionService) {
 
   }
   arrinput: Inputbase<string>[] = [];
   form!: FormGroup;
   tieu_de = 'Cập nhật tác vụ';
   ngOnInit(): void {
-    console.log(JSON.stringify(this.data));
     this.set_data();
     this.form = this.controlSrv.toFormGroup(this.arrinput as Inputbase<string>[]);
   }
-  arr_catepermission = [{ key: '1', value: 'nhom 1' }, { key: '2', value: 'nhom 2' }, { key: '3', value: 'nhom 3' }];
-  arr_function = [{ key: '1', value: 'chuc nang 1' }, { key: '2', value: 'chuc nang 2' }];
   set_data() {
+    let arr_status = [{ key: '1', value: 'Kích hoạt' }, { key: '0', value: 'Huỷ kích hoạt' }];
     let dataIP: Inputbase<string>[] = [
       new InputText({
-        key: 'code',
-        label: 'Mã tác vụ',
-        value: this.data.code,
+        key: 'name',
+        label: 'Tên chức năng',
+        value: this.data.name,
         required: true,
         order: 1
       }),
-      new InputText({
-        key: 'name',
-        label: 'Tên tác vụ',
-        value: this.data.name,
+      new InputDropdown({
+        key: 'functionid',
+        label: 'Chức năng',
         required: true,
+        options: this.data.list_function,
+        value: this.data.functionid !== null && this.data.functionid !== 0 ? this.data.functionid?.toString() : '',
         order: 2
       }),
       new InputText({
         key: 'description',
         label: 'Mô tả',
         value: this.data.description,
-        required: true,
         order: 3
       }),
       new InputDropdown({
-        key: 'categoryfunctionid',
-        label: 'Nhóm tác vụ',
-        options: this.arr_catepermission,
-        //value: this.data.categoryfunctionid == null ? 'all' : this.data.categoryfunctionid?.toString(),
+        key: 'active',
+        label: 'Trạng thái',
+        options: arr_status,
+        value: this.data.active === 0 ? '0' : '1',
         order: 4
       }),
-      new InputDropdown({
-        key: 'funtionid',
-        label: 'Chức năng',
-        options: this.arr_function,
-        //value: this.data.categoryfunctionid == null ? 'all' : this.data.categoryfunctionid?.toString(),
+      new InputText({
+        key: 'id',
+        label: '',
+        value: this.data.id.toString(),
+        type: 'hidden',
         order: 5
       }),
     ];
@@ -72,9 +73,53 @@ export class EditsysPermissionComponent  {
   onSubmit() {
     let data_edit = JSON.parse(JSON.stringify(this.form.value));
     console.log(data_edit);
+    let value_save: permission = {
+      id: 0,
+      name: '',
+      functionid: 0,
+      description: '',
+      active: 0
+    };
+    value_save.id = Number(data_edit['id']);
+    value_save.name = data_edit['name'];
+    value_save.description = data_edit['description'];
+
+    if (data_edit['active'] !== '' && data_edit['active'] !== undefined) {
+      value_save.active = Number(data_edit['active']['key']);
+    }
+
+    if (data_edit['functionid'] !== '' && data_edit['functionid'] !== undefined) {
+      value_save.functionid = Number(data_edit['functionid']['key']);
+    }
+
+    let thongbao = 'Có lỗi trong quá trình lưu dữ liệu!';
+    if (value_save.id === 0) {
+      this.permissionSrv.add_permission(value_save).subscribe(t => {
+        let kq = t.data;
+        if (!kq) {
+          thongbao = t.message;
+          this.messageSrv.error(thongbao);
+        } else {
+          this.messageSrv.success('Bạn đã thực hiện thành công');
+          this.dialogRef.close('Success');
+        }
+      });
+    } else {
+      this.permissionSrv.update_permission(value_save).subscribe(t => {
+        let kq = t.data;
+        if (!kq) {
+          thongbao = t.message;
+          this.messageSrv.error(thongbao);
+        } else {
+          this.messageSrv.success('Bạn đã thực hiện thành công');
+          this.dialogRef.close('Success');
+        }
+      });
+    }
   }
   onClose(gt: string) {
     this.dialogRef.close(gt);
   }
 }
+
 

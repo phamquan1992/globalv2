@@ -51,6 +51,11 @@ namespace qcglobal.FEW
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IfunctionRepository, functionRepository>();
             services.AddScoped<IrolesRepository, rolesRepository>();
+            services.AddScoped<IpermissionRepository, permissionRepository>();
+            services.AddScoped<IlogsystemRepository, logsystemRepository>();
+            services.AddScoped<IuserdataRepository, userdataRepository>();
+            services.AddScoped<IuserroleRepository, userroleRepository>();
+            services.AddScoped<IrolepermissionRepository, rolepermissionRepository>();
             #endregion
 
             #region Services
@@ -67,6 +72,11 @@ namespace qcglobal.FEW
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IfunctionService, functionService>();
             services.AddScoped<IrolesService, rolesService>();
+            services.AddScoped<IpermissionService, permissionService>();
+            services.AddScoped<IlogsystemService, logsystemService>();
+            services.AddScoped<IuserdataService, userdataService>();
+            services.AddScoped<IuserroleService, userroleService>();
+            services.AddScoped<IrolepermissionService, rolepermissionService>();
             #endregion
 
             services.AddControllersWithViews();
