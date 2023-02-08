@@ -65,7 +65,7 @@ namespace qcglobal.FEW.Controllers
         /// <param name="entity">thông tin đối tượng thêm</param>
         [HttpPost]
         [Route("Add")]
-        public IActionResult Post(TEntity entity)
+        public virtual IActionResult Post(TEntity entity)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace qcglobal.FEW.Controllers
         /// <param name="entity">thông tin đối tượng sửa</param>
         [HttpPut]
         [Route("Update")]
-        public IActionResult Put([FromBody] TEntity entity)
+        public virtual IActionResult Put([FromBody] TEntity entity)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace qcglobal.FEW.Controllers
         /// <param name="id">Id đối tượng</param>
         [HttpDelete]
         [Route("Delete")]
-        public IActionResult Delete([FromBody] int[] ids)
+        public virtual IActionResult Delete([FromBody] int[] ids)
         {
             try
             {

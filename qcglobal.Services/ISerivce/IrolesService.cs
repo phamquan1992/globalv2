@@ -7,7 +7,7 @@ using System.Text;
 
 namespace qcglobal.Services.ISerivce
 {
-    public interface IrolesService : IBaseService<roles>
+    public interface IrolesService : IBaseService<role>
     {
     }
 }

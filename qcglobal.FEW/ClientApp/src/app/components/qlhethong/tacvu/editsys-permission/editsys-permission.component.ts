@@ -34,7 +34,7 @@ export class EditsysPermissionComponent  {
     let dataIP: Inputbase<string>[] = [
       new InputText({
         key: 'name',
-        label: 'Tên chức năng',
+        label: 'Tên tác vụ',
         value: this.data.name,
         required: true,
         order: 1

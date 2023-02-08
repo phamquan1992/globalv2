@@ -5,7 +5,7 @@ using System.Text;
 
 namespace qcglobal.Repositories.IRepository
 {
-    public interface IrolesRepository : IBaseRepository<roles>
+    public interface IrolesRepository : IBaseRepository<role>
     {
     }
 }

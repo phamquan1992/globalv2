@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { nguoidung } from '../models/nguoidung';
+import { userdata } from '../models/userdata';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ObservableService {
-  private userInfo: BehaviorSubject<nguoidung>;
+  private userInfo: BehaviorSubject<userdata>;
   private isAuthenticated: BehaviorSubject<boolean>;
   private currentPage: BehaviorSubject<string>;
   private currentToken: BehaviorSubject<string>;
@@ -15,7 +15,7 @@ export class ObservableService {
   constructor(private storage: LocalStorageService) {
     let currUser = storage.getUserInfo();
     let curToken = storage.getTokenInfo();
-    this.userInfo = new BehaviorSubject<nguoidung>(currUser);
+    this.userInfo = new BehaviorSubject<userdata>(currUser);
     this.isAuthenticated = new BehaviorSubject<boolean>(currUser != undefined);
     this.currentPage = new BehaviorSubject<string>("");
     this.currentToken = new BehaviorSubject<string>(curToken);
@@ -28,13 +28,13 @@ export class ObservableService {
     this.currentPage.next(newValue);
   }
 
-  getUserInfo(): Observable<nguoidung> {
+  getUserInfo(): Observable<userdata> {
     // let currUser = this.storage.getUserInfo();
-    // this.userInfo = new BehaviorSubject<nguoidung>(currUser);
+    // this.userInfo = new BehaviorSubject<userdata>(currUser);
     return this.userInfo.asObservable();
   }
 
-  setUserValue(newValue: nguoidung): void {
+  setUserValue(newValue: userdata): void {
     this.userInfo.next(newValue);
     if (newValue == undefined) {
       this.setAuthenState(false);
@@ -48,7 +48,7 @@ export class ObservableService {
   reMoveUserValue() {
     this.storage.removeUserValue();
     let currUser = this.storage.getUserInfo();
-    this.userInfo = new BehaviorSubject<nguoidung>(currUser);
+    this.userInfo = new BehaviorSubject<userdata>(currUser);
   }
   getTokenValue(): Observable<string> {
     return this.currentToken;

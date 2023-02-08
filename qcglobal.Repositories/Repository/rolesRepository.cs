@@ -7,7 +7,7 @@ using System.Text;
 
 namespace qcglobal.Repositories.Repository
 {
-    public class rolesRepository : BaseRepository<roles>, IrolesRepository
+    public class rolesRepository : BaseRepository<role>, IrolesRepository
     {
         private readonly ISession _session;
         public rolesRepository(ISession session) : base(session)

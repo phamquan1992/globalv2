@@ -5,11 +5,11 @@ using System.Text;
 
 namespace qcglobal.Core.Domain
 {
-    public class rolesMapping : ClassMap<roles>
+    public class roleMapping : ClassMap<role>
     {
-        public rolesMapping()
+        public roleMapping()
         {
-            Table("roles");
+            Table("role");
             Id(x => x.id).GeneratedBy.Identity();
             Map(x => x.name).Not.Nullable();
             Map(x => x.active).Nullable();

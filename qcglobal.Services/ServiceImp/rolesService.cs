@@ -8,7 +8,7 @@ using System.Text;
 
 namespace qcglobal.Services.ServiceImp
 {
-    public class rolesService : BaseService<roles>, IrolesService
+    public class rolesService : BaseService<role>, IrolesService
     {
         #region declare
 

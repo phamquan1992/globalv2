@@ -1,43 +1,47 @@
-import { logsystem } from './../../../models/logsystem';
-import { EditsysRoleComponent } from './editsys-role/editsys-role.component';
+import { EmployeeService } from './../../../services/employee.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Inputbase } from 'src/app/models/input-base';
 import { InputDropdown } from 'src/app/models/inputdropdown';
 import { InputText } from 'src/app/models/inputtext';
-import { role } from 'src/app/models/role';
+import { userdata } from 'src/app/models/userdata';
+import { FunctionService } from 'src/app/services/function.service';
 import { InputControlService } from 'src/app/services/input-control.service';
-import { AlertComponent } from 'src/app/shared/alert/alert.component';
-import { roleService } from 'src/app/services/role.service';
 import { MessageService } from 'src/app/services/message.service';
-import { PermissionService } from 'src/app/services/permission.service';
+import { userdataService } from 'src/app/services/userdata.service';
+import { AlertComponent } from 'src/app/shared/alert/alert.component';
+import { EdituserdataComponent } from './edituserdata/edituserdata.component';
+import { roleService } from 'src/app/services/role.service';
 
 @Component({
-  selector: 'app-vaitro',
-  templateUrl: './vaitro.component.html',
-  styleUrls: ['./vaitro.component.css']
+  selector: 'app-nguoidung',
+  templateUrl: './nguoidung.component.html',
+  styleUrls: ['./nguoidung.component.css']
 })
-export class VaitroComponent implements OnInit, AfterViewInit {
-  arr_role: role[] = [];
-  arr_per: { key: string, value: string }[] = [];
-  dataSource = new MatTableDataSource<role>(this.arr_role);
+export class NguoidungComponent implements OnInit, AfterViewInit {
+  arr_username: userdata[] = [];
+  arr_email: { key: string, value: string }[] = [];
+  arr_role: { key: string, value: string }[] = [];
+  dataSource = new MatTableDataSource<userdata>(this.arr_username);
   loading$ = false;
   name_filter = '';
-  displayedColumns: string[] = ['select', 'name','active', 'action'];
-  displayedColumns2: string[] = ['cot1', 'name_filter','active_filter','cot6'];
-  selection = new SelectionModel<role>(true, []);
+  arr_function: { key: string, value: string }[] = [];
+  displayedColumns: string[] = ['select', 'username','email','status', 'action'];
+  displayedColumns2: string[] = ['cot1', 'username_filter','email_filter','status_filter','cot6'];
+  selection = new SelectionModel<userdata>(true, []);
   arr_filter: Inputbase<string>[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   formfilter!: FormGroup;
   filter_object = {
-    name: '',
-    active: 0
+    username: '',
+    email: '',
+    status: 0
   }
-  constructor(private dialog: MatDialog, private rolerv: roleService,private permissionSrv: PermissionService, private controlSrv: InputControlService, private messSrv: MessageService,) {
+  constructor(private dialog: MatDialog, private functionSrv: FunctionService, private roleSrv: roleService, private EmployeeService: EmployeeService, private userdataSrv: userdataService, private controlSrv: InputControlService, private messSrv: MessageService,) {
 
   }
   ngAfterViewInit(): void {
@@ -45,33 +49,50 @@ export class VaitroComponent implements OnInit, AfterViewInit {
   }
   ngOnInit(): void {
     this.get_data();
-    this.rolerv.f5_service().subscribe(t => {
+    this.userdataSrv.f5_service().subscribe(t => {
       this.get_data();
     });
   }
   get_data() {
-    this.arr_role = [];
-    this.rolerv.get_list().subscribe(t => {
-      this.arr_role = t;
-
-      this.permissionSrv.get_list().subscribe(per => {
-        this.arr_per = per.map(({ id, name }) => {
-          let tmp: { key: string, value: string } = {
+    this.arr_username = [];
+    this.userdataSrv.get_list().subscribe(t => {
+      this.arr_username = t;
+      this.EmployeeService.get_list().subscribe(employee => {
+        this.arr_email = employee.map(({ id, email }) => {
+          let tmp1: { key: string, value: string } = {
             key: '',
             value: ''
           };
-          tmp.key = id.toString();
-          tmp.value = name;
-          return tmp;
+          if(email != undefined && email!=null){
+            tmp1.key = email;
+            tmp1.value = email;
+          }
+          else{
+            tmp1.key = '';
+            tmp1.value = '';
+          }
+          return tmp1;
+        })
+
+        this.roleSrv.get_list().subscribe(roles => {
+          this.arr_role = roles.map(({ id, name }) => {
+            let tmp: { key: string, value: string } = {
+              key: '',
+              value: ''
+            };
+            tmp.key = id.toString();
+            tmp.value = name;
+            return tmp;
+          });
+          this.set_filter();
+          this.dataSource = new MatTableDataSource<userdata>(this.arr_username);
+          this.dataSource.filterPredicate = this.createFilter();
+          this.dataSource.paginator = this.paginator;
+          this.onchange();
         });
 
       });
 
-      this.set_filter();
-      this.dataSource = new MatTableDataSource<role>(this.arr_role);
-      this.dataSource.filterPredicate = this.createFilter();
-      this.dataSource.paginator = this.paginator;
-      this.onchange();
     });
   }
 
@@ -81,17 +102,45 @@ export class VaitroComponent implements OnInit, AfterViewInit {
   }
 
   set_data() {
-    let arr_status = [{  key: '1', value: 'Kích hoạt' }, { key: '0', value: 'Huỷ kích hoạt' }];
+    let arr_status = [{  key: '1', value: 'Đã Kích hoạt' }, { key: '0', value: 'Chưa kích hoạt' }];
     let dataIP: Inputbase<string>[] = [
       new InputText({
-        key: 'name',
+        key: 'username',
+        label: '',
+        value: '',
+        required: false,
+        order: 1
+      }),
+      new InputText({
+        key: 'password',
+        label: '',
+        value: '',
+        required: false,
+        order: 1
+      }),
+      new InputText({
+        key: 'email',
+        label: '',
+        value: '',
+        required: false,
+        order: 1
+      }),
+      new InputText({
+        key: 'serialtoken',
+        label: '',
+        value: '',
+        required: false,
+        order: 1
+      }),
+      new InputText({
+        key: 'isadmin',
         label: '',
         value: '',
         required: false,
         order: 1
       }),
       new InputDropdown({
-        key: 'active',
+        key: 'status',
         label: '',
         options: arr_status,
         value: '',
@@ -148,7 +197,7 @@ export class VaitroComponent implements OnInit, AfterViewInit {
 
   xoa_obj(id: string) {
     let arrID = JSON.parse("[" + id + "]");
-    this.rolerv.delete_arr(arrID).subscribe(t => {
+    this.userdataSrv.delete_arr(arrID).subscribe(t => {
       if (t.data) {
         this.messSrv.success('Bạn đã thực hiện thành công!');
         this.selection.clear();
@@ -160,7 +209,7 @@ export class VaitroComponent implements OnInit, AfterViewInit {
 
   Xoa_arr() {
     let arrID = this.selection.selected.map(t => t.id);
-    this.rolerv.delete_arr(arrID).subscribe(t => {
+    this.userdataSrv.delete_arr(arrID).subscribe(t => {
       if (t.data) {
         this.messSrv.success('Bạn đã thực hiện thành công!');
         this.selection.clear();
@@ -170,25 +219,30 @@ export class VaitroComponent implements OnInit, AfterViewInit {
     });
   }
 
-  sua_item(gt: role) {
-    let data: role = {
+  sua_item(gt: userdata) {
+    let data: userdata = {
       id: gt.id,
-      name: gt.name,
-      active: gt.active,
-      lstpermissionid: gt.lstpermissionid,
-      list_per: this.arr_per
+      username: gt.username,
+      password: gt.password,
+      email: gt.email,
+      serialtoken: gt.serialtoken,
+      isadmin: gt.isadmin,
+      status: gt.status,
+      lstroleid: gt.lstroleid,
+      list_email : this.arr_email,
+      list_role : this.arr_role
     };
     this.showEditDialog(data);
   }
 
-  showEditDialog(data: role) {
+  showEditDialog(data: userdata) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = "520px";
+    dialogConfig.width = "620px";
     dialogConfig.panelClass = "pd_dialog_none";
     dialogConfig.data = data;
     dialogConfig.disableClose = true;
-    this.dialog.open(EditsysRoleComponent, dialogConfig).afterClosed().subscribe(
+    this.dialog.open(EdituserdataComponent, dialogConfig).afterClosed().subscribe(
       res => {
         if (res != null && res != '' && res != undefined) {
 
@@ -199,11 +253,14 @@ export class VaitroComponent implements OnInit, AfterViewInit {
 
   applyFilter(name_filter: string, gt: any) {
     let name_tmp = name_filter.split('_')[0];
-    if (name_tmp === 'name') {
-      this.filter_object.name = gt.value;
+    if (name_tmp === 'username') {
+      this.filter_object.username = gt.value;
     }
-    if (name_tmp === 'active') {
-      this.filter_object.active = gt.value;
+    if (name_tmp === 'email') {
+      this.filter_object.email = gt.value;
+    }
+    if (name_tmp === 'status') {
+      this.filter_object.status = gt.value;
     }
     this.dataSource.filter = JSON.stringify(this.filter_object);
     this.dataSource.paginator = this.paginator;
@@ -213,12 +270,16 @@ export class VaitroComponent implements OnInit, AfterViewInit {
   }
 
   them_moi() {
-    let tmp: role = {
-      name: '',
-      active: 1,
+    let tmp: userdata = {
+      username: '',
+      password: '',
+      email: '',
+      serialtoken: '',
+      isadmin: 0,
       id: 0,
-      lstpermissionid: '',
-      list_per: this.arr_per
+      lstroleid:'',
+      list_email : this.arr_email,
+      list_role : this.arr_role
     };
     this.showEditDialog(tmp);
   }
@@ -227,7 +288,7 @@ export class VaitroComponent implements OnInit, AfterViewInit {
       let searchTerms = JSON.parse(filter);
       let isFilterSet = false;
       for (const col in searchTerms) {
-        if (col !== 'active') {
+        if (col !== 'status') {
           if (searchTerms[col].toString() !== '') {
             isFilterSet = true;
           } else {
@@ -251,7 +312,7 @@ export class VaitroComponent implements OnInit, AfterViewInit {
           let arr: boolean[] = [];
           let found = false;
           for (const col in searchTerms) {
-            if (col !== 'active') {
+            if (col !== 'status') {
               let filter_str = data[col] || '';
               if (filter_str.toString().toLowerCase().indexOf(searchTerms[col].trim().toLowerCase()) != -1 && isFilterSet) {
                 found = true

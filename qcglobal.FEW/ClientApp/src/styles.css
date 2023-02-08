@@ -75,3 +75,11 @@ img {
     background: #115077;
 }
 }
+
+.mat-select-trigger {
+  min-width: 80vw;
+}
+
+.mat-select-panel {
+  max-height: 80vh !important;
+}

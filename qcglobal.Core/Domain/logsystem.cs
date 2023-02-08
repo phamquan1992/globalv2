@@ -10,7 +10,7 @@ namespace qcglobal.Core.Domain
         [Key]
         public virtual int id { get; set; }
         public virtual int userid { get; set; }
-        public virtual string events { get; set; }
+        public virtual string eventlog { get; set; }
         public virtual string commentlog { get; set; }
         public virtual string ipaddress { get; set; }
         public virtual string browser { get; set; }

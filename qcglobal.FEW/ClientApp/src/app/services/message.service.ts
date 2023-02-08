@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { nguoidung } from '../models/nguoidung';
+import { userdata } from '../models/userdata';
 import { ObservableService } from './observable.service';
 
 @Injectable({
@@ -30,14 +30,14 @@ export class MessageService {
       });
   }
   handError(error: any) {
-    let nd: nguoidung = {
-      email: '',
-      id: '',
-      sodt: '',
-      token: '',
-      active: false,
-      isadmin: false
-    };
+    // let nd: userdata = {
+    //   email: '',
+    //   id: 0,
+    //   serialtoken: '',
+    //   username: '',
+    //   status: 0,
+    //   isadmin: 0
+    // };
     if (error.status == 401) {
       this.warn('Đã hết phiên làm việc');
       this._sharingService.reMoveTokenValue();

@@ -1,0 +1,146 @@
+<div class="w-full h-full relative">
+  <div class="bg-[#196898] py-[10px] px-[15px]">
+    <div class="text-white text-sm leading-[22px] break-words font-medium">
+      <div>{{ tieu_de }}</div>
+    </div>
+  </div>
+
+  <div
+    class="max-w-[768px] mx-auto border border-solid border-gray-400 p-3 rounded shadow-lg"
+  >
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="form"
+      class="grid grid-cols-1 md:grid-cols-2 gap-3"
+    >
+      <div
+        *ngFor="let question of arrinput"
+        [ngClass]="{
+          'col-span-1 md:col-span-2':
+            question.key === 'description' || question.key === 'username'
+        }"
+      >
+        <app-custominput [iteminput]="question" [form]="form">
+        </app-custominput>
+      </div>
+      <!-- password -->
+      <div class="col-span-1 md:col-span-2 role-selected flex flex-row">
+        <div style="width: 100%; padding-bottom: 10px">
+          <label for="" class="text-sm">Mật khẩu</label>
+          <input
+            id="pswuser"
+            name="pass"
+            placeholder="*********"
+            (blur)="blurPassword($event)"
+            type="password"
+            class="w-full text-ellipsis relative inline-block py-1 px-[11px] leading-[1.5] focus:border focus:border-solid focus:border-[#196898] border border-solid border-[#d9d9d9] my-[3px] mr-[6px] ml-0 h-8 text-[13px]  "
+          />
+          <span id="errNull"
+          style="display: none" class="text-red-600 text-xs">Mật khẩu không được để trống</span>
+        </div>
+
+        <div style="width: 100%; padding-bottom: 10px; margin-left: 12px;">
+          <label for="" class="text-sm">Nhập lại mật khẩu</label>
+          <input
+
+            id="repassword"
+            name="repass"
+            placeholder="*********"
+            (blur)="blurRePassword($event)"
+            type="password"
+            class="w-full text-ellipsis relative inline-block py-1 px-[11px] leading-[1.5] focus:border focus:border-solid focus:border-[#196898] border border-solid border-[#d9d9d9] my-[3px] mr-[6px] ml-0 h-8 text-[13px]  "
+          />
+          <span
+          id="errNotMapPass" style="display: none" class="text-red-600 text-xs ">Không trùng mật khẩu đã nhập</span>
+        </div>
+      </div>
+
+      <!-- vai tro -->
+      <div class="col-span-1 md:col-span-2 role-selected flex flex-col">
+        <!-- <mat-form-field style="width: 100%; background-color: white;">
+          <mat-select multiple (selectionChange)="eventSelection($event.value)" [formControl]="foodForm">
+            <mat-option *ngFor="let website of websites"  [value]="website.value">
+              {{website.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <div style="width: 100%; padding-bottom: 10px">
+          <label for="" class="text-sm">Chọn Vai trò</label>
+        </div>
+        <div style="width: 100%" class="flex flex-row justify-around h-52">
+          <div
+            class="example-container"
+            class="h-52 overflow-auto ..."
+            style="width: 40%"
+          >
+            <div
+              cdkDropList
+              #perList="cdkDropList"
+              [cdkDropListData]="notIncludeRole"
+              [cdkDropListConnectedTo]="[doneList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div
+                class="example-box"
+                *ngFor="let item of notIncludeRole"
+                [cdkDragDisabled]="item == 'Chưa tồn tại trong người dùng'"
+                cdkDrag
+              >
+                {{ item }}
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="example-container"
+            class="h-52 overflow-auto ..."
+            style="width: 40%"
+          >
+            <div
+              cdkDropList
+              #doneList="cdkDropList"
+              [cdkDropListData]="includedRole"
+              [cdkDropListConnectedTo]="[perList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)"
+            >
+              <div
+                class="example-box"
+                *ngFor="let item of includedRole"
+                [cdkDragDisabled]="item == 'Cập nhật trong người dùng'"
+                cdkDrag
+              >
+                {{ item }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-1 md:col-span-2">
+        <button
+          type="submit"
+          [attr.disabled]="form.invalid ? '' : null"
+          [ngClass]="{
+            'bg-[#196898]': form.valid,
+            'bg-[#849faf]': !form.valid
+          }"
+          class="leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] text-white text-[13px] mr-[5px] my-[5px]"
+        >
+          Cập nhật
+        </button>
+        <button
+          type="button"
+          (click)="onClose('')"
+          class="bg-red-500 leading-[1.5] relative inline-block font-normal text-center cursor-pointer h-8 px-[15px] text-white text-[13px] mr-[5px] my-[5px]"
+        >
+          Huỷ bỏ
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <button class="absolute top-0 right-0 h-[43px] w-[43px] text-white">
+    <i class="fa fa-times" aria-hidden="true" (click)="onClose('')"></i>
+  </button>
+</div>

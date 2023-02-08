@@ -22,8 +22,10 @@ import { VaitroComponent } from './vaitro/vaitro.component';
 import { LogsystemComponent } from './logsystem/logsystem.component';
 import { EditsysFunctionComponent } from './chucnang/editsys-function/editsys-function.component';
 import { EditsysRoleComponent } from './vaitro/editsys-role/editsys-role.component';
-
-
+import { NguoidungComponent } from './nguoidung/nguoidung.component';
+import { EdituserdataComponent } from './nguoidung/edituserdata/edituserdata.component';
+import {MatSelectModule} from '@angular/material/select';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { EditsysRoleComponent } from './vaitro/editsys-role/editsys-role.compone
     LogsystemComponent,
     EditsysFunctionComponent,
     EditsysPermissionComponent,
-    EditsysRoleComponent
+    EditsysRoleComponent,
+    NguoidungComponent,
+    EdituserdataComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +56,9 @@ import { EditsysRoleComponent } from './vaitro/editsys-role/editsys-role.compone
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,
-    DragDropModule
+    DragDropModule,
+    MatSelectModule,
+    NgxMatSelectSearchModule
   ]
 })
 export class QlhethongModule { }

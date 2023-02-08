@@ -225,6 +225,7 @@ namespace qcglobal.Repositories.Repository
             bool result = false;
             try
             {
+                _session.Clear();
                 _session.Update(entity);
                 result = true;
             }

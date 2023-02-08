@@ -12,7 +12,7 @@ namespace qcglobal.Core.Domain
             Table("logsystem");
             Id(x => x.id).GeneratedBy.Identity();
             Map(x => x.userid).Not.Nullable();
-            Map(x => x.events).Nullable();
+            Map(x => x.eventlog).Nullable();
             Map(x => x.commentlog).Nullable();
             Map(x => x.ipaddress).Nullable();
             Map(x => x.browser).Nullable();

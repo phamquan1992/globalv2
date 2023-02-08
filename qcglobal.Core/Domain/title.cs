@@ -28,4 +28,5 @@ namespace qcglobal.Core.Domain
         public virtual int? last_updated_by { get; set; }
         public virtual DateTime? last_updated_date { get; set; }
     }
+
 }

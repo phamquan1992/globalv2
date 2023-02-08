@@ -394,6 +394,7 @@ namespace qcglobal.Services.ServiceImp
             }
             if (msgArrayError != null && msgArrayError.Count > 0)
             {
+                _serviceResult.Data = false;
                 _serviceResult.Message = msgArrayError[0];
             }
 

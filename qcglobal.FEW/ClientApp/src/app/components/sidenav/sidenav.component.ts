@@ -45,7 +45,7 @@ export class SidenavComponent {
     },
     {
       title: 'Quản lý hệ thống', icon: 'fa fa-server', submenu: true, submenuItem: [
-        { title: 'Quản lý người dùng', icon: 'fa fa-user' },
+        { title: 'Quản lý người dùng', icon: 'fa fa-user', url: '/qlhethong/nguoidung' },
         { title: 'Quản lý chức năng', icon: 'fa fa-list-ul', url: '/qlhethong/chucnang' },
         { title: 'Quản lý tác vụ, quyền hạn', icon: 'fa fa-list-ol', url: '/qlhethong/tacvu' },
         { title: 'Quản lý vai trò', icon: 'fa fa-book', url: '/qlhethong/vaitro' },

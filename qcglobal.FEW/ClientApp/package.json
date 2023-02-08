@@ -23,6 +23,7 @@
     "@microsoft/signalr": "^7.0.0",
     "crypto-js": "^4.1.1",
     "font-awesome": "^4.7.0",
+    "ngx-mat-select-search": "^7.0.0",
     "ngx-toastr": "^16.0.1",
     "ngx-webstorage-service": "^5.0.0",
     "rxjs": "~7.5.0",

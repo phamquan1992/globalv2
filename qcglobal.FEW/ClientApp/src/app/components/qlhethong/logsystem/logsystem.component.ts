@@ -1,4 +1,6 @@
+import { logsystem } from './../../../models/logsystem';
 import { Component, OnInit } from '@angular/core';
+import { LogsystemService } from 'src/app/services/logsystem.service';
 export interface item_log {
   action_name: string;
   action_time: string;
@@ -11,25 +13,26 @@ export interface item_log {
 })
 export class LogsystemComponent implements OnInit {
   arr_time: item_log[] = [];
+  arr_log: logsystem[] = [];
+  arr_totallog: logsystem[] = [];
+  startIndex = 1;
+
+  constructor(private logsystemSrv: LogsystemService) {
+
+  }
+
   ngOnInit(): void {
-    for (let index = 0; index < 10; index++) {
-      let gt_tmp: item_log = {
-        action_name: 'Chức năng ' + index,
-        action_time: '05/01/2023',
-        action_dec: 'Thực hiện chức năng ' + index
-      };
-      this.arr_time.push(gt_tmp);
-    }
+    this.startIndex = 1;
+    this.logsystemSrv.get_list().subscribe(logsystem => {
+      debugger;
+      this.arr_totallog = logsystem;
+      this.arr_log = logsystem.slice(0,10);
+    });
+
   }
   xem_them() {
-    for (let index = 0; index < 10; index++) {
-      let gt_tmp: item_log = {
-        action_name: 'Chức năng ' + this.arr_time.length,
-        action_time: '05/01/2023',
-        action_dec: 'Thực hiện chức năng ' + this.arr_time.length
-      };
-      this.arr_time.push(gt_tmp);
-    }
+    this.startIndex += 1;
+    this.arr_log = this.arr_totallog.slice(0, this.startIndex*10 - 1)
   }
 
 }

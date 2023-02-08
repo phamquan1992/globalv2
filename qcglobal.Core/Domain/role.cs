@@ -5,7 +5,7 @@ using static qcglobal.Core.Other.ValidatorAttribute;
 
 namespace qcglobal.Core.Domain
 {
-    public class roles
+    public class role
     {
         [Key]
         public virtual int id { get; set; }
@@ -19,5 +19,8 @@ namespace qcglobal.Core.Domain
         public virtual DateTime? created_date { get; set; }
         public virtual string last_update_by { get; set; }
         public virtual DateTime? last_update_date { get; set; } = DateTime.Now;
+
+        public virtual string lstpermissionid { get; set; }
+
     }
 }

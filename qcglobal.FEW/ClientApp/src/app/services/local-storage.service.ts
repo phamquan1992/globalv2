@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { LOCAL_STORAGE, StorageService, StorageTranscoders } from 'ngx-webstorage-service';
-import { nguoidung } from '../models/nguoidung';
+import { userdata } from '../models/userdata';
 import * as CryptoJS from 'crypto-js';
 
 @Injectable({
@@ -8,7 +8,7 @@ import * as CryptoJS from 'crypto-js';
 })
 export class LocalStorageService {
 
-  
+
   private numberStorage!: StorageService<number>;
   private stringStorage!: StorageService<string>;
   public UI: string = '996F1E39-17E2-4171-963A-F21B92E1228A';
@@ -28,18 +28,18 @@ export class LocalStorageService {
     data = CryptoJS.AES.decrypt(data, this.SK);
     return data.toString(CryptoJS.enc.Utf8);
   }
-  public getUserInfo(): nguoidung {
+  public getUserInfo(): userdata {
     let user = this.stringStorage.get(this.UI);
     if (user) {
       let userInfo = this.decrypt(user);
       return JSON.parse(JSON.parse(userInfo));
     }
     else {
-      return undefined as unknown as nguoidung;
+      return undefined as unknown as userdata;
     }
   }
 
-  public setUserInfo(user: nguoidung): void {
+  public setUserInfo(user: userdata): void {
     return this.stringStorage.set(this.UI, this.encrypt(JSON.stringify(user)));
   }
   public getTokenInfo(): string {
